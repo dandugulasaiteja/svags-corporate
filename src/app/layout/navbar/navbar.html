@@ -1,0 +1,50 @@
+<header class="navbar" [class.scrolled]="scrolled()" role="banner">
+  <div class="navbar-inner">
+    <!-- Logo -->
+    <a routerLink="/" class="logo" aria-label="SVAGS TECHNOLOGIES Home" (click)="closeMobile()">
+      <div class="logo-mark">
+        <span>S</span>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">SVAGS</span>
+        <span class="logo-sub">TECHNOLOGIES</span>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="desktop-nav" aria-label="Main navigation">
+      @for (link of navLinks; track link.route) {
+        <a [routerLink]="link.route" routerLinkActive="active" class="nav-link">
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <!-- CTA -->
+    <div class="navbar-actions">
+      <a routerLink="/contact" class="btn-contact" aria-label="Contact us">
+        Contact
+      </a>
+      <!-- Mobile toggle -->
+      <button class="mobile-toggle" (click)="toggleMobile()" [attr.aria-expanded]="mobileOpen()" aria-label="Toggle menu">
+        <span class="bar" [class.open]="mobileOpen()"></span>
+        <span class="bar" [class.open]="mobileOpen()"></span>
+        <span class="bar" [class.open]="mobileOpen()"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  @if (mobileOpen()) {
+    <div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <nav>
+        @for (link of navLinks; track link.route) {
+          <a [routerLink]="link.route" routerLinkActive="active" class="mobile-link" (click)="closeMobile()">
+            {{ link.label }}
+          </a>
+        }
+        <a routerLink="/contact" class="mobile-cta" (click)="closeMobile()">Contact Us</a>
+      </nav>
+    </div>
+  }
+</header>

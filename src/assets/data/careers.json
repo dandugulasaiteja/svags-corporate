@@ -1,0 +1,97 @@
+{
+  "careers": {
+    "headline": "Build the Future With Us",
+    "subheadline": "Join a team of passionate engineers, designers, and product thinkers who are building technology that matters.",
+    "benefits": [
+      {
+        "icon": "pi pi-bolt",
+        "title": "High Impact Work",
+        "description": "Work on products used by thousands of people. Your code ships to production and makes a real difference."
+      },
+      {
+        "icon": "pi pi-users",
+        "title": "Great Team",
+        "description": "Work alongside talented, humble, and driven people who care deeply about craft and quality."
+      },
+      {
+        "icon": "pi pi-chart-line",
+        "title": "Rapid Growth",
+        "description": "We are growing fast. There is enormous opportunity to take ownership and grow your career quickly."
+      },
+      {
+        "icon": "pi pi-globe",
+        "title": "Remote Friendly",
+        "description": "We believe great work can happen anywhere. Flexible work arrangements for the right candidates."
+      },
+      {
+        "icon": "pi pi-book",
+        "title": "Learning Budget",
+        "description": "Dedicated budget for courses, conferences, books, and anything that helps you grow professionally."
+      },
+      {
+        "icon": "pi pi-heart",
+        "title": "Health & Wellness",
+        "description": "Comprehensive health coverage and wellness programs to keep you at your best."
+      }
+    ],
+    "hiringProcess": [
+      { "step": 1, "title": "Apply", "description": "Submit your application with your resume and a brief note about why you want to join." },
+      { "step": 2, "title": "Screening", "description": "A 30-minute call with our team to learn about you and share more about the role." },
+      { "step": 3, "title": "Technical", "description": "A practical technical assessment relevant to the role you are applying for." },
+      { "step": 4, "title": "Interview", "description": "In-depth conversations with the team to assess culture fit and technical depth." },
+      { "step": 5, "title": "Offer", "description": "We move fast. If it is a great fit, you will receive an offer within days." }
+    ],
+    "openPositions": [
+      {
+        "id": "sde-angular",
+        "title": "Senior Angular Developer",
+        "department": "Engineering",
+        "type": "Full-time",
+        "location": "Remote / India",
+        "experience": "3-6 years",
+        "description": "Build world-class web applications using Angular, TypeScript, and modern frontend technologies."
+      },
+      {
+        "id": "sde-dotnet",
+        "title": "Senior .NET Developer",
+        "department": "Engineering",
+        "type": "Full-time",
+        "location": "Remote / India",
+        "experience": "3-6 years",
+        "description": "Design and build scalable backend APIs and services using .NET, C#, and Azure."
+      },
+      {
+        "id": "flutter-dev",
+        "title": "Flutter Developer",
+        "department": "Engineering",
+        "type": "Full-time",
+        "location": "Remote / India",
+        "experience": "2-5 years",
+        "description": "Create beautiful, performant cross-platform mobile applications using Flutter and Dart."
+      },
+      {
+        "id": "product-designer",
+        "title": "Product Designer",
+        "department": "Design",
+        "type": "Full-time",
+        "location": "Remote / India",
+        "experience": "3-5 years",
+        "description": "Design intuitive, beautiful product experiences from concept to pixel-perfect implementation."
+      }
+    ],
+    "programs": [
+      {
+        "id": "graduate",
+        "title": "Graduate Program",
+        "description": "A structured 12-month program for fresh graduates to learn, grow, and contribute to real products from day one.",
+        "icon": "pi pi-graduation-cap"
+      },
+      {
+        "id": "internship",
+        "title": "Internship Program",
+        "description": "6-month internships for students who want to gain real-world experience building production software.",
+        "icon": "pi pi-star"
+      }
+    ]
+  }
+}

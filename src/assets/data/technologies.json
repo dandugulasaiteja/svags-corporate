@@ -1,0 +1,268 @@
+{
+  "technologies": [
+    {
+      "id": "angular",
+      "name": "Angular",
+      "category": "Frontend",
+      "description": "Enterprise-grade web framework for building scalable, high-performance applications with TypeScript.",
+      "icon": "assets/icons/angular.svg",
+      "color": "#DD0031"
+    },
+    {
+      "id": "react",
+      "name": "React",
+      "category": "Frontend",
+      "description": "A declarative, component-based JavaScript library for building fast and interactive user interfaces.",
+      "icon": "assets/icons/react.svg",
+      "color": "#61DAFB"
+    },
+    {
+      "id": "vuejs",
+      "name": "Vue.js",
+      "category": "Frontend",
+      "description": "Progressive JavaScript framework for building modern, reactive web interfaces with simplicity.",
+      "icon": "assets/icons/vue.svg",
+      "color": "#42B883"
+    },
+    {
+      "id": "nextjs",
+      "name": "Next.js",
+      "category": "Frontend",
+      "description": "React framework with server-side rendering, static generation, and full-stack capabilities.",
+      "icon": "assets/icons/nextjs.svg",
+      "color": "#000000"
+    },
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "category": "Frontend",
+      "description": "Strongly typed superset of JavaScript that improves code quality, maintainability, and developer experience.",
+      "icon": "assets/icons/typescript.svg",
+      "color": "#3178C6"
+    },
+    {
+      "id": "dotnet",
+      "name": ".NET",
+      "category": "Backend",
+      "description": "Microsoft's powerful cross-platform framework for building robust APIs and enterprise backend services.",
+      "icon": "assets/icons/dotnet.svg",
+      "color": "#512BD4"
+    },
+    {
+      "id": "nodejs",
+      "name": "Node.js",
+      "category": "Backend",
+      "description": "JavaScript runtime built on Chrome's V8 engine for building fast, scalable server-side applications.",
+      "icon": "assets/icons/nodejs.svg",
+      "color": "#339933"
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "category": "Backend",
+      "description": "Versatile, high-level programming language widely used for web development, automation, data science, and AI.",
+      "icon": "assets/icons/python.svg",
+      "color": "#3776AB"
+    },
+    {
+      "id": "java",
+      "name": "Java",
+      "category": "Backend",
+      "description": "Robust, object-oriented programming language for building enterprise-grade, cross-platform applications.",
+      "icon": "assets/icons/java.svg",
+      "color": "#ED8B00"
+    },
+    {
+      "id": "go",
+      "name": "Go",
+      "category": "Backend",
+      "description": "Google's statically typed, compiled language designed for simplicity, performance, and concurrency.",
+      "icon": "assets/icons/go.svg",
+      "color": "#00ADD8"
+    },
+    {
+      "id": "rust",
+      "name": "Rust",
+      "category": "Backend",
+      "description": "Systems programming language focused on safety, speed, and concurrency without a garbage collector.",
+      "icon": "assets/icons/rust.svg",
+      "color": "#CE422B"
+    },
+    {
+      "id": "flutter",
+      "name": "Flutter",
+      "category": "Mobile",
+      "description": "Google's UI toolkit for crafting beautiful, natively compiled mobile applications from a single codebase.",
+      "icon": "assets/icons/flutter.svg",
+      "color": "#02569B"
+    },
+    {
+      "id": "reactnative",
+      "name": "React Native",
+      "category": "Mobile",
+      "description": "Build native mobile apps for iOS and Android using React and JavaScript with near-native performance.",
+      "icon": "assets/icons/react.svg",
+      "color": "#61DAFB"
+    },
+    {
+      "id": "swift",
+      "name": "Swift",
+      "category": "Mobile",
+      "description": "Apple's powerful and intuitive programming language for building native iOS and macOS applications.",
+      "icon": "assets/icons/swift.svg",
+      "color": "#FA7343"
+    },
+    {
+      "id": "kotlin",
+      "name": "Kotlin",
+      "category": "Mobile",
+      "description": "Modern, concise programming language for Android development, fully interoperable with Java.",
+      "icon": "assets/icons/kotlin.svg",
+      "color": "#7F52FF"
+    },
+    {
+      "id": "azure",
+      "name": "Azure",
+      "category": "Cloud",
+      "description": "Microsoft Azure cloud platform powering our infrastructure with enterprise-grade reliability and global scale.",
+      "icon": "assets/icons/azure.svg",
+      "color": "#0078D4"
+    },
+    {
+      "id": "aws",
+      "name": "AWS",
+      "category": "Cloud",
+      "description": "Amazon Web Services — the world's most comprehensive and broadly adopted cloud platform.",
+      "icon": "assets/icons/aws.svg",
+      "color": "#FF9900"
+    },
+    {
+      "id": "gcp",
+      "name": "Google Cloud",
+      "category": "Cloud",
+      "description": "Google Cloud Platform offering computing, storage, and application services for modern workloads.",
+      "icon": "assets/icons/gcp.svg",
+      "color": "#4285F4"
+    },
+    {
+      "id": "sqlserver",
+      "name": "SQL Server",
+      "category": "Database",
+      "description": "Microsoft's enterprise relational database management system for mission-critical data workloads.",
+      "icon": "assets/icons/sqlserver.svg",
+      "color": "#CC2927"
+    },
+    {
+      "id": "postgresql",
+      "name": "PostgreSQL",
+      "category": "Database",
+      "description": "Powerful, open-source object-relational database system known for reliability and advanced features.",
+      "icon": "assets/icons/postgresql.svg",
+      "color": "#336791"
+    },
+    {
+      "id": "mongodb",
+      "name": "MongoDB",
+      "category": "Database",
+      "description": "Leading NoSQL document database for modern applications requiring flexible, scalable data storage.",
+      "icon": "assets/icons/mongodb.svg",
+      "color": "#47A248"
+    },
+    {
+      "id": "mysql",
+      "name": "MySQL",
+      "category": "Database",
+      "description": "The world's most popular open-source relational database, trusted by millions of applications globally.",
+      "icon": "assets/icons/mysql.svg",
+      "color": "#4479A1"
+    },
+    {
+      "id": "redis",
+      "name": "Redis",
+      "category": "Database",
+      "description": "In-memory data structure store used for caching, session management, and real-time data processing.",
+      "icon": "assets/icons/redis.svg",
+      "color": "#DC382D"
+    },
+    {
+      "id": "elasticsearch",
+      "name": "Elasticsearch",
+      "category": "Database",
+      "description": "Distributed search and analytics engine for full-text search, log analytics, and real-time insights.",
+      "icon": "assets/icons/elasticsearch.svg",
+      "color": "#005571"
+    },
+    {
+      "id": "docker",
+      "name": "Docker",
+      "category": "DevOps",
+      "description": "Container platform for packaging applications and dependencies into portable, isolated environments.",
+      "icon": "assets/icons/docker.svg",
+      "color": "#2496ED"
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes",
+      "category": "DevOps",
+      "description": "Open-source container orchestration system for automating deployment, scaling, and management of applications.",
+      "icon": "assets/icons/kubernetes.svg",
+      "color": "#326CE5"
+    },
+    {
+      "id": "github-actions",
+      "name": "GitHub Actions",
+      "category": "DevOps",
+      "description": "Automated CI/CD pipelines for continuous integration, testing, and deployment workflows.",
+      "icon": "assets/icons/github.svg",
+      "color": "#24292E"
+    },
+    {
+      "id": "terraform",
+      "name": "Terraform",
+      "category": "DevOps",
+      "description": "Infrastructure as Code tool for building, changing, and versioning cloud infrastructure safely and efficiently.",
+      "icon": "assets/icons/terraform.svg",
+      "color": "#7B42BC"
+    },
+    {
+      "id": "signalr",
+      "name": "SignalR",
+      "category": "Real-time",
+      "description": "ASP.NET library for adding real-time web functionality, enabling server-to-client push communications.",
+      "icon": "assets/icons/signalr.svg",
+      "color": "#512BD4"
+    },
+    {
+      "id": "graphql",
+      "name": "GraphQL",
+      "category": "Real-time",
+      "description": "Query language for APIs that gives clients the power to ask for exactly the data they need.",
+      "icon": "assets/icons/graphql.svg",
+      "color": "#E10098"
+    },
+    {
+      "id": "ai",
+      "name": "AI & ML",
+      "category": "AI",
+      "description": "Artificial intelligence and machine learning capabilities integrated across our product ecosystem.",
+      "icon": "assets/icons/ai.svg",
+      "color": "#F97316"
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "category": "AI",
+      "description": "Leveraging GPT and other OpenAI models to build intelligent, conversational, and generative AI features.",
+      "icon": "assets/icons/openai.svg",
+      "color": "#10A37F"
+    },
+    {
+      "id": "tensorflow",
+      "name": "TensorFlow",
+      "category": "AI",
+      "description": "Google's open-source machine learning framework for building and deploying ML models at scale.",
+      "icon": "assets/icons/tensorflow.svg",
+      "color": "#FF6F00"
+    }
+  ]
+}

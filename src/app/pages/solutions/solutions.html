@@ -1,0 +1,31 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="chip chip-primary">Solutions</span>
+    <h1>Technology Solutions for Every Challenge</h1>
+    <p>From marketplace platforms to AI-powered enterprise software, we build solutions that drive real business outcomes.</p>
+  </div>
+</div>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="solutions-grid">
+      @for (solution of solutions(); track solution.id) {
+        <div class="solution-card">
+          <div class="solution-icon" [style.background]="solution.color + '15'">
+            <i [class]="solution.icon" [style.color]="solution.color"></i>
+          </div>
+          <h3>{{ solution.title }}</h3>
+          <p>{{ solution.description }}</p>
+          <ul class="solution-features">
+            @for (feature of solution.features; track feature) {
+              <li>
+                <i class="pi pi-arrow-right"></i>
+                {{ feature }}
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>

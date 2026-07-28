@@ -1,0 +1,63 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="chip chip-primary">Our Products</span>
+    <h1>Software Products Built for the Modern World</h1>
+    <p>We are building a portfolio of innovative software products across multiple industries. Each product is crafted with care, built to scale, and designed to delight.</p>
+  </div>
+</div>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="products-grid">
+      @for (product of products(); track product.id) {
+        <div class="product-card" [class.coming-soon]="product.status === 'coming-soon'">
+          <div class="product-card-header">
+            <div class="product-icon" [style.background]="product.color + '18'">
+              <i [class]="product.icon" [style.color]="product.color"></i>
+            </div>
+            <span class="product-status" [class.status-live]="product.status === 'live'" [class.status-soon]="product.status === 'coming-soon'">
+              {{ product.status === 'live' ? 'Live' : 'Coming Soon' }}
+            </span>
+          </div>
+
+          <h3>{{ product.name }}</h3>
+          <p class="product-tagline">{{ product.tagline }}</p>
+          <p class="product-desc">{{ product.description }}</p>
+
+          @if (product.technologies.length > 0) {
+            <div class="product-tech">
+              @for (tech of product.technologies; track tech) {
+                <span class="tech-tag">{{ tech }}</span>
+              }
+            </div>
+          }
+
+          @if (product.features.length > 0) {
+            <ul class="product-features">
+              @for (feature of product.features; track feature) {
+                <li><i class="pi pi-check"></i> {{ feature }}</li>
+              }
+            </ul>
+          }
+
+          @if (product.url) {
+            <a [href]="product.url" target="_blank" rel="noopener noreferrer" class="btn-primary product-btn">
+              <i class="pi pi-external-link"></i>
+              Visit {{ product.name }}
+            </a>
+          } @else if (product.status === 'live') {
+            <a routerLink="/contact" class="btn-primary product-btn">
+              <i class="pi pi-send"></i>
+              Contact Us
+            </a>
+          } @else {
+            <button class="btn-secondary product-btn" disabled>
+              <i class="pi pi-clock"></i>
+              Coming Soon
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="chip chip-primary">Security</span>
+    <h1>Security is Our Foundation</h1>
+    <p>We take security seriously. Every product we build is designed with security at its core, not as an afterthought.</p>
+  </div>
+</div>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="security-grid">
+      @for (practice of practices; track practice.title) {
+        <div class="security-card">
+          <div class="security-icon">
+            <i [class]="practice.icon"></i>
+          </div>
+          <h3>{{ practice.title }}</h3>
+          <p>{{ practice.desc }}</p>
+        </div>
+      }
+    </div>
+
+    <div class="report-section">
+      <div class="report-card">
+        <div class="report-icon">
+          <i class="pi pi-exclamation-triangle"></i>
+        </div>
+        <div>
+          <h3>Report a Security Vulnerability</h3>
+          <p>If you discover a security vulnerability in any of our products, please report it responsibly to our security team.</p>
+          <a href="mailto:security@svagstech.com" class="btn-primary">
+            <i class="pi pi-envelope"></i>
+            security&#64;svagstech.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

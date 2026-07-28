@@ -1,0 +1,75 @@
+@if (company(); as co) {
+  <div class="page-hero">
+    <div class="container">
+      <span class="chip chip-primary">About Us</span>
+      <h1>{{ co.name }}</h1>
+      <p>{{ co.description }}</p>
+    </div>
+  </div>
+
+  <!-- Mission & Vision -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="mv-grid">
+        <div class="mv-card mission">
+          <div class="mv-icon">
+            <i class="pi pi-bullseye"></i>
+          </div>
+          <h2>Our Mission</h2>
+          <p>{{ co.mission }}</p>
+        </div>
+        <div class="mv-card vision">
+          <div class="mv-icon">
+            <i class="pi pi-eye"></i>
+          </div>
+          <h2>Our Vision</h2>
+          <p>{{ co.vision }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section-pad values-bg">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip chip-primary">What We Stand For</span>
+        <h2>Our Core Values</h2>
+        <p>The principles that guide every decision we make.</p>
+      </div>
+      <div class="values-grid">
+        @for (value of co.values; track value.id) {
+          <div class="value-card">
+            <div class="value-icon" [style.background]="value.color + '15'">
+              <i [class]="value.icon" [style.color]="value.color"></i>
+            </div>
+            <h3>{{ value.title }}</h3>
+            <p>{{ value.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip chip-primary">Our Journey</span>
+        <h2>Company History</h2>
+      </div>
+      <div class="timeline">
+        @for (milestone of co.milestones; track milestone.title) {
+          <div class="timeline-item">
+            <div class="timeline-year">{{ milestone.year }}</div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>{{ milestone.title }}</h3>
+              <p>{{ milestone.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

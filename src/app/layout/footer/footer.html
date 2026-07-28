@@ -1,0 +1,66 @@
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <a routerLink="/" class="footer-logo" aria-label="SVAGS TECHNOLOGIES">
+        <div class="logo-mark"><span>S</span></div>
+        <div class="logo-text">
+          <span class="logo-name">SVAGS</span>
+          <span class="logo-sub">TECHNOLOGIES</span>
+        </div>
+      </a>
+      <p class="footer-tagline">Building Technology That Shapes Tomorrow.</p>
+      <div class="social-links">
+        <a href="https://linkedin.com/company/svags" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link">
+          <i class="pi pi-linkedin"></i>
+        </a>
+        <a href="https://twitter.com/SvagsOfficial" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-link">
+          <i class="pi pi-twitter"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Products</h4>
+        @for (item of products; track item.label) {
+          @if (item.route) {
+            <a [routerLink]="item.route">{{ item.label }}</a>
+          } @else {
+            <a [href]="item.href" target="_blank" rel="noopener noreferrer">{{ item.label }}</a>
+          }
+        }
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        @for (item of company; track item.label) {
+          <a [routerLink]="item.route">{{ item.label }}</a>
+        }
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        @for (item of resources; track item.label) {
+          <a [routerLink]="item.route">{{ item.label }}</a>
+        }
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        @for (item of legal; track item.label) {
+          <a [routerLink]="item.route">{{ item.label }}</a>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p>&copy; {{ year }} SVAGS TECHNOLOGIES. All rights reserved.</p>
+      <p class="footer-location">
+        <i class="pi pi-map-marker"></i>
+        Made in India
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,107 @@
+@if (careers(); as c) {
+  <div class="page-hero">
+    <div class="container">
+      <span class="chip chip-primary">Careers</span>
+      <h1>{{ c.headline }}</h1>
+      <p>{{ c.subheadline }}</p>
+    </div>
+  </div>
+
+  <!-- Benefits -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip chip-primary">Why Join Us</span>
+        <h2>Life at SVAGS Technologies</h2>
+      </div>
+      <div class="benefits-grid">
+        @for (benefit of c.benefits; track benefit.title) {
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i [class]="benefit.icon"></i>
+            </div>
+            <h3>{{ benefit.title }}</h3>
+            <p>{{ benefit.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Hiring Process -->
+  <section class="section-pad process-bg">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip chip-primary">How We Hire</span>
+        <h2>Our Hiring Process</h2>
+        <p>We move fast and keep things simple. Here is what to expect.</p>
+      </div>
+      <div class="process-steps">
+        @for (step of c.hiringProcess; track step.step) {
+          <div class="process-step">
+            <div class="step-number">{{ step.step }}</div>
+            <div class="step-content">
+              <h3>{{ step.title }}</h3>
+              <p>{{ step.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Positions -->
+  <section class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip chip-primary">Open Roles</span>
+        <h2>Open Positions</h2>
+        <p>We are always looking for exceptional people. See if there is a role for you.</p>
+      </div>
+      <div class="positions-list">
+        @for (position of c.openPositions; track position.id) {
+          <div class="position-card">
+            <div class="position-info">
+              <h3>{{ position.title }}</h3>
+              <p>{{ position.description }}</p>
+              <div class="position-meta">
+                <span><i class="pi pi-briefcase"></i> {{ position.department }}</span>
+                <span><i class="pi pi-map-marker"></i> {{ position.location }}</span>
+                <span><i class="pi pi-clock"></i> {{ position.experience }}</span>
+                <span class="type-badge">{{ position.type }}</span>
+              </div>
+            </div>
+            <a href="mailto:careers@svagstech.com?subject=Application: {{ position.title }}" class="btn-primary apply-btn">
+              Apply Now
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs -->
+  <section class="section-pad programs-bg">
+    <div class="container">
+      <div class="section-header">
+        <span class="chip chip-primary">Programs</span>
+        <h2>Early Career Programs</h2>
+        <p>Starting your career? We have programs designed just for you.</p>
+      </div>
+      <div class="programs-grid">
+        @for (program of c.programs; track program.id) {
+          <div class="program-card">
+            <div class="program-icon">
+              <i [class]="program.icon"></i>
+            </div>
+            <h3>{{ program.title }}</h3>
+            <p>{{ program.description }}</p>
+            <a href="mailto:careers@svagstech.com?subject={{ program.title }} Application" class="btn-secondary">
+              Learn More
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

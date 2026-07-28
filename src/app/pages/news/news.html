@@ -1,0 +1,53 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="chip chip-primary">News</span>
+    <h1>Latest from SVAGS Technologies</h1>
+    <p>Announcements, product launches, and company updates.</p>
+  </div>
+</div>
+
+<section class="section-pad">
+  <div class="container">
+    @if (news().length > 0) {
+      <!-- Featured article -->
+      @if (news()[0]; as featured) {
+        <div class="featured-article">
+          <div class="article-meta">
+            <span class="article-category">{{ featured.category }}</span>
+            <span class="article-date">{{ formatDate(featured.date) }}</span>
+            <span class="article-read">{{ featured.readTime }}</span>
+          </div>
+          <h2>{{ featured.title }}</h2>
+          <p>{{ featured.excerpt }}</p>
+          <div class="article-tags">
+            @for (tag of featured.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Other articles -->
+      <div class="news-grid">
+        @for (article of news().slice(1); track article.id) {
+          <div class="news-card">
+            <div class="article-meta">
+              <span class="article-category">{{ article.category }}</span>
+              <span class="article-date">{{ formatDate(article.date) }}</span>
+            </div>
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.excerpt }}</p>
+            <div class="news-footer">
+              <span class="article-read">{{ article.readTime }}</span>
+              <div class="article-tags">
+                @for (tag of article.tags.slice(0,2); track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

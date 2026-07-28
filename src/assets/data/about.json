@@ -1,0 +1,64 @@
+{
+  "company": {
+    "name": "SVAGS TECHNOLOGIES",
+    "founded": "2026",
+    "headquarters": "India",
+    "mission": "To build innovative software products that simplify everyday life and empower businesses worldwide through technology.",
+    "vision": "To become a globally recognized technology company that creates multiple impactful products across diverse industries.",
+    "description": "SVAGS TECHNOLOGIES is an Indian technology company on a mission to build world-class software products. We combine deep engineering expertise with a passion for design to create products that people love.",
+    "values": [
+      {
+        "id": "innovation",
+        "title": "Innovation First",
+        "description": "We challenge the status quo and embrace new ideas. Every product we build starts with asking 'what if we could do this better?'",
+        "icon": "pi pi-sparkles",
+        "color": "#009688"
+      },
+      {
+        "id": "security",
+        "title": "Security by Design",
+        "description": "Security is not an afterthought. We architect every system with security at its core, protecting our users and their data.",
+        "icon": "pi pi-shield",
+        "color": "#6366F1"
+      },
+      {
+        "id": "engineering",
+        "title": "Engineering Excellence",
+        "description": "We hold ourselves to the highest engineering standards. Clean code, robust architecture, and continuous improvement define us.",
+        "icon": "pi pi-code",
+        "color": "#8B5CF6"
+      },
+      {
+        "id": "scalability",
+        "title": "Built to Scale",
+        "description": "We design for tomorrow, not just today. Our systems are architected to handle millions of users without breaking a sweat.",
+        "icon": "pi pi-chart-bar",
+        "color": "#F59E0B"
+      },
+      {
+        "id": "customer",
+        "title": "Customer First",
+        "description": "Our customers are at the heart of everything we do. We listen, learn, and build products that genuinely solve real problems.",
+        "icon": "pi pi-heart",
+        "color": "#EF4444"
+      }
+    ],
+    "milestones": [
+      {
+        "year": "June 2026",
+        "title": "Company Incorporated",
+        "description": "SVAGS TECHNOLOGIES PRIVATE LIMITED was incorporated in India in June 2026 with a vision to build world-class software products."
+      },
+      {
+        "year": "Aug 2026",
+        "title": "SVAGS Launched",
+        "description": "Our first product, SVAGS — a Smart Car Service Platform — was launched in August 2026, connecting car owners with trusted service centers."
+      },
+      {
+        "year": "2027",
+        "title": "Growing Portfolio",
+        "description": "Expanding our product portfolio with multiple new products in development across different industries."
+      }
+    ]
+  }
+}

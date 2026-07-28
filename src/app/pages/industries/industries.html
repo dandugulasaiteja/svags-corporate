@@ -1,0 +1,30 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="chip chip-primary">Industries</span>
+    <h1>Serving Industries That Shape the World</h1>
+    <p>We build technology for the industries that matter most — from automotive to healthcare, education to government.</p>
+  </div>
+</div>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="industries-grid">
+      @for (industry of industries(); track industry.id) {
+        <div class="industry-card">
+          <div class="industry-header">
+            <div class="industry-icon" [style.background]="industry.color + '15'">
+              <i [class]="industry.icon" [style.color]="industry.color"></i>
+            </div>
+            <h3>{{ industry.name }}</h3>
+          </div>
+          <p>{{ industry.description }}</p>
+          <div class="use-cases">
+            @for (useCase of industry.useCases; track useCase) {
+              <span class="use-case-tag">{{ useCase }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

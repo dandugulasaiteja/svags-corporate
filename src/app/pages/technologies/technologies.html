@@ -1,0 +1,38 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="chip chip-primary">Tech Stack</span>
+    <h1>Built With World-Class Technology</h1>
+    <p>We carefully select the best tools and frameworks to build products that are fast, secure, and built to last.</p>
+  </div>
+</div>
+
+<section class="section-pad">
+  <div class="container">
+    <!-- Filter tabs -->
+    <div class="filter-tabs">
+      @for (cat of categories(); track cat) {
+        <button
+          class="filter-tab"
+          [class.active]="selected() === cat"
+          (click)="filter(cat)"
+        >
+          {{ cat }}
+        </button>
+      }
+    </div>
+
+    <div class="tech-grid">
+      @for (tech of filtered(); track tech.id) {
+        <div class="tech-card">
+          <div class="tech-card-header">
+            <div class="tech-color-dot" [style.background]="tech.color"></div>
+            <span class="tech-category">{{ tech.category }}</span>
+          </div>
+          <h3>{{ tech.name }}</h3>
+          <p>{{ tech.description }}</p>
+
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": "svags",
+      "name": "SVAGS",
+      "tagline": "Smart Car Service Platform",
+      "description": "A modern, intelligent platform that connects car owners with trusted service centers. Streamline bookings, track repairs in real-time, and manage your vehicle's entire service history — all in one place.",
+      "status": "live",
+      "url": "https://svags.com",
+      "icon": "pi pi-car",
+      "color": "#009688",
+      "technologies": ["Angular", ".NET", "Flutter", "Azure", "SQL Server", "Redis"],
+      "features": ["Real-time tracking", "Smart booking", "Service history", "Multi-platform"]
+    },
+    {
+      "id": "svags-bulk-messaging",
+      "name": "SVAGS Bulk Messaging",
+      "tagline": "Bulk Messaging Software",
+      "description": "A powerful bulk messaging platform that enables businesses to send high-volume SMS, WhatsApp, and email campaigns with ease. Reach your audience instantly with smart delivery, analytics, and automation.",
+      "status": "live",
+      "url": null,
+      "icon": "pi pi-send",
+      "color": "#F97316",
+      "technologies": ["Angular", ".NET", "Azure", "SQL Server", "Redis"],
+      "features": ["Bulk SMS & WhatsApp", "Email campaigns", "Delivery analytics", "Automation"]
+    }
+  ]
+}

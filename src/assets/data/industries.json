@@ -1,0 +1,52 @@
+{
+  "industries": [
+    {
+      "id": "automotive",
+      "name": "Automotive",
+      "description": "Transforming the automotive service industry with smart platforms that connect vehicle owners, service centers, and parts suppliers.",
+      "icon": "pi pi-car",
+      "color": "#009688",
+      "useCases": ["Service booking", "Fleet management", "Parts marketplace", "Diagnostics"]
+    },
+    {
+      "id": "healthcare",
+      "name": "Healthcare",
+      "description": "Digital health solutions that improve patient outcomes, streamline clinical workflows, and enable data-driven healthcare delivery.",
+      "icon": "pi pi-heart",
+      "color": "#EF4444",
+      "useCases": ["Patient portals", "Appointment scheduling", "Medical records", "Telemedicine"]
+    },
+    {
+      "id": "education",
+      "name": "Education",
+      "description": "EdTech platforms that make quality education accessible, engaging, and measurable for students and institutions worldwide.",
+      "icon": "pi pi-graduation-cap",
+      "color": "#6366F1",
+      "useCases": ["LMS platforms", "Virtual classrooms", "Assessment tools", "Student analytics"]
+    },
+    {
+      "id": "finance",
+      "name": "Finance",
+      "description": "Secure fintech solutions for payments, lending, insurance, and wealth management with regulatory compliance built-in.",
+      "icon": "pi pi-chart-line",
+      "color": "#10B981",
+      "useCases": ["Payment processing", "Loan management", "KYC/AML", "Financial reporting"]
+    },
+    {
+      "id": "retail",
+      "name": "Retail",
+      "description": "Omnichannel retail technology that unifies online and offline experiences, inventory management, and customer engagement.",
+      "icon": "pi pi-shopping-bag",
+      "color": "#F59E0B",
+      "useCases": ["E-commerce", "Inventory management", "POS systems", "Loyalty programs"]
+    },
+    {
+      "id": "government",
+      "name": "Government",
+      "description": "Citizen-centric digital government solutions that improve public service delivery, transparency, and operational efficiency.",
+      "icon": "pi pi-verified",
+      "color": "#8B5CF6",
+      "useCases": ["Citizen portals", "Document management", "Public services", "Data analytics"]
+    }
+  ]
+}

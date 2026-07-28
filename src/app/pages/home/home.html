@@ -1,0 +1,235 @@
+<!-- HERO SECTION -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-bg">
+    <div class="hero-gradient"></div>
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-orb orb-3"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge reveal">
+      <span class="badge-dot"></span>
+      <span>SVAGS TECHNOLOGIES</span>
+    </div>
+
+    <h1 class="hero-headline reveal">
+      Building Technology<br>
+      <span class="gradient-text">That Shapes Tomorrow.</span>
+    </h1>
+
+    <p class="hero-subtitle reveal">
+      SVAGS TECHNOLOGIES builds innovative software products that simplify everyday life and empower businesses worldwide.
+    </p>
+
+    <div class="hero-actions reveal">
+      <a routerLink="/products" class="btn-primary">
+        <i class="pi pi-box"></i>
+        Explore Products
+      </a>
+      <a routerLink="/careers" class="btn-secondary">
+        <i class="pi pi-users"></i>
+        Careers
+      </a>
+    </div>
+
+    <div class="hero-trust reveal">
+      <span>Trusted by businesses across India</span>
+      <div class="trust-dots">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual reveal">
+    <div class="hero-card-stack">
+      <div class="hero-card card-back-2"></div>
+      <div class="hero-card card-back-1"></div>
+      <div class="hero-card card-main">
+        <div class="card-header">
+          <div class="card-logo">
+            <span>S</span>
+          </div>
+          <div>
+            <div class="card-title">SVAGS</div>
+            <div class="card-sub">Smart Car Service Platform</div>
+          </div>
+          <span class="live-badge">Live</span>
+        </div>
+        <div class="card-stats">
+          <div class="card-stat">
+            <span class="stat-num">24/7</span>
+            <span class="stat-lbl">Uptime</span>
+          </div>
+          <div class="card-stat">
+            <span class="stat-num">4.9★</span>
+            <span class="stat-lbl">Rating</span>
+          </div>
+        </div>
+        <div class="card-tech-row">
+          @for (t of techStack.slice(0,4); track t.name) {
+            <span class="tech-pill" [style.background]="t.color + '18'" [style.color]="t.color">{{ t.name }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="stats-section" aria-label="Statistics">
+  <div class="container">
+    <div class="stats-grid">
+      @for (stat of stats; track stat.label) {
+        <div class="stat-card reveal">
+          <i [class]="stat.icon + ' stat-icon'"></i>
+          <div class="stat-value">{{ stat.value }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCT -->
+<section class="featured-section section-pad" aria-label="Featured Product">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="chip chip-primary">Our First Product</span>
+      <h2>Introducing SVAGS</h2>
+      <p>A modern, intelligent platform that connects car owners with trusted service centers.</p>
+    </div>
+
+    <div class="featured-grid">
+      <div class="featured-content reveal">
+        <div class="featured-logo">
+          <div class="featured-logo-mark"><span>S</span></div>
+          <div>
+            <div class="featured-name">SVAGS</div>
+            <div class="featured-tagline">Smart Car Service Platform</div>
+          </div>
+        </div>
+        <p class="featured-desc">
+          SVAGS reimagines the car service experience. Book appointments, track repairs in real-time, manage your vehicle's complete service history, and connect with certified service centers — all from one beautiful platform.
+        </p>
+        <ul class="featured-features">
+          <li><i class="pi pi-check-circle"></i> Real-time service tracking</li>
+          <li><i class="pi pi-check-circle"></i> Smart appointment booking</li>
+          <li><i class="pi pi-check-circle"></i> Complete service history</li>
+          <li><i class="pi pi-check-circle"></i> Multi-platform (Web + Mobile)</li>
+        </ul>
+        <div class="featured-actions">
+          <a href="https://svags.com" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            <i class="pi pi-external-link"></i>
+            Visit SVAGS
+          </a>
+          <a routerLink="/products" class="btn-secondary">Learn More</a>
+        </div>
+      </div>
+
+      <div class="featured-visual reveal">
+        <div class="phone-mockup">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="app-header">
+                <div class="app-logo-sm"><span>S</span></div>
+                <span>SVAGS</span>
+              </div>
+              <div class="app-card">
+                <div class="app-card-label">Next Service</div>
+                <div class="app-card-value">Honda City</div>
+                <div class="app-card-sub">Oil Change · Due in 3 days</div>
+                <div class="app-progress">
+                  <div class="app-progress-bar"></div>
+                </div>
+              </div>
+              <div class="app-status-row">
+                <div class="app-status-item">
+                  <i class="pi pi-check-circle" style="color:#10B981"></i>
+                  <span>Booked</span>
+                </div>
+                <div class="app-status-item">
+                  <i class="pi pi-clock" style="color:#F59E0B"></i>
+                  <span>In Progress</span>
+                </div>
+                <div class="app-status-item">
+                  <i class="pi pi-send" style="color:#009688"></i>
+                  <span>Ready</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-glow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY SECTION -->
+<section class="tech-section section-pad" aria-label="Technologies">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="chip chip-primary">Our Stack</span>
+      <h2>Built With World-Class Technology</h2>
+      <p>We use the best tools available to build products that are fast, secure, and scalable.</p>
+    </div>
+
+    <div class="tech-grid">
+      @for (tech of techStack; track tech.name) {
+        <div class="tech-chip reveal" [style.--tech-color]="tech.color">
+          <span class="tech-dot" [style.background]="tech.color"></span>
+          {{ tech.name }}
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- VALUES SECTION -->
+<section class="values-section section-pad" aria-label="Our Values">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="chip chip-primary">What Drives Us</span>
+      <h2>Our Core Values</h2>
+      <p>The principles that guide every decision we make and every product we build.</p>
+    </div>
+
+    <div class="values-grid">
+      @for (value of values; track value.title) {
+        <div class="value-card reveal">
+          <div class="value-icon">
+            <i [class]="value.icon"></i>
+          </div>
+          <h3>{{ value.title }}</h3>
+          <p>{{ value.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section" aria-label="Call to action">
+  <div class="container">
+    <div class="cta-card reveal">
+      <div class="cta-orb cta-orb-1"></div>
+      <div class="cta-orb cta-orb-2"></div>
+      <div class="cta-content">
+        <h2>Let's Build The Future Together.</h2>
+        <p>Whether you are a customer, partner, or future team member — we would love to connect.</p>
+        <div class="cta-actions">
+          <a routerLink="/contact" class="btn-primary">
+            <i class="pi pi-send"></i>
+            Get In Touch
+          </a>
+          <a routerLink="/careers" class="btn-secondary-light">
+            <i class="pi pi-users"></i>
+            Join Our Team
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
