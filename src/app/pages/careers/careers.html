@@ -71,9 +71,9 @@
                 <span class="type-badge">{{ position.type }}</span>
               </div>
             </div>
-            <a href="mailto:careers@svagstech.com?subject=Application: {{ position.title }}" class="btn-primary apply-btn">
+            <button type="button" (click)="openApplicationModal(position)" class="btn-primary apply-btn">
               Apply Now
-            </a>
+            </button>
           </div>
         }
       </div>
@@ -104,4 +104,103 @@
       </div>
     </div>
   </section>
+
+  <!-- Application Modal -->
+  @if (showApplicationModal()) {
+    <div class="modal-backdrop" (click)="closeApplicationModal()"></div>
+    <div class="application-modal">
+      <div class="modal-header">
+        <h2>Apply for {{ selectedPosition()?.title }}</h2>
+        <button type="button" (click)="closeApplicationModal()" class="close-btn" aria-label="Close">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+      <form class="application-form" (ngSubmit)="submitApplication()">
+        @if (applicationMessage()) {
+          <div [class.success]="applicationSuccess()" [class.error]="!applicationSuccess()" class="form-message">
+            {{ applicationMessage() }}
+          </div>
+        }
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="app-name">Full Name *</label>
+            <input
+              id="app-name"
+              type="text"
+              placeholder="Your full name"
+              class="form-input"
+              [value]="applicationForm().name"
+              (input)="updateFormField('name', $any($event.target).value)"
+              [disabled]="isSubmitting()"
+            >
+          </div>
+          <div class="form-group">
+            <label for="app-email">Email Address *</label>
+            <input
+              id="app-email"
+              type="email"
+              placeholder="you@company.com"
+              class="form-input"
+              [value]="applicationForm().email"
+              (input)="updateFormField('email', $any($event.target).value)"
+              [disabled]="isSubmitting()"
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="app-phone">Phone Number *</label>
+          <input
+            id="app-phone"
+            type="tel"
+            placeholder="+1 (555) 000-0000"
+            class="form-input"
+            [value]="applicationForm().phone"
+            (input)="updateFormField('phone', $any($event.target).value)"
+            [disabled]="isSubmitting()"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="app-resume">Resume/CV *</label>
+          <input
+            id="app-resume"
+            type="file"
+            class="form-input"
+            accept=".pdf,.doc,.docx"
+            (change)="onResumeSelected($event)"
+            [disabled]="isSubmitting()"
+          >
+          @if (resumeFile()) {
+            <p class="resume-name">{{ resumeFile()?.name }}</p>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="app-message">Message</label>
+          <textarea
+            id="app-message"
+            placeholder="Tell us why you're interested in this position..."
+            rows="4"
+            class="form-input form-textarea"
+            [value]="applicationForm().message"
+            (input)="updateFormField('message', $any($event.target).value)"
+            [disabled]="isSubmitting()"
+          ></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" (click)="closeApplicationModal()" class="btn-secondary" [disabled]="isSubmitting()">
+            Cancel
+          </button>
+          <button type="submit" class="btn-primary" [disabled]="isSubmitting()">
+            <i class="pi pi-send"></i>
+            {{ isSubmitting() ? 'Submitting...' : 'Submit Application' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  }
 }

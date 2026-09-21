@@ -23,8 +23,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   technologies = signal<Technology[]>([]);
 
   stats = [
-    { value: '2+', label: 'Products', icon: 'pi pi-box' },
-    { value: '20+', label: 'Countries', icon: 'pi pi-globe' },
+    { value: '1', label: 'Product Live', icon: 'pi pi-box' },
+    { value: '3', label: 'Platforms', icon: 'pi pi-globe' },
     { value: '24/7', label: 'Availability', icon: 'pi pi-clock' },
   ];
 

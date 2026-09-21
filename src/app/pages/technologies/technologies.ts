@@ -24,7 +24,7 @@ export class TechnologiesComponent implements OnInit {
   ngOnInit(): void {
     this.seo.set({
       title: 'Technologies',
-      description: 'The world-class technology stack powering SVAGS Technologies products.',
+      description: 'The technologies our engineering team works with, from the stack powering SVAGS today to the tools we bring to future products.',
       url: '/technologies'
     });
     this.content.getTechnologies().subscribe(t => {

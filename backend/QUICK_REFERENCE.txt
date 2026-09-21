@@ -1,0 +1,196 @@
+================================================================================
+  SVAGS TECHNOLOGIES - QUICK REFERENCE GUIDE
+================================================================================
+
+DATABASE SETUP FILES LOCATION:
+  C:\Sai\svags-corporate\backend\database\
+
+================================================================================
+EXECUTE THESE SCRIPTS IN ORDER
+================================================================================
+
+1️⃣  01_CreateDatabase.sql
+    - Creates the SvagsCorporateDb database
+    - Run against: master database
+    - Estimated time: < 1 second
+
+2️⃣  02_CreateTables.sql
+    - Creates all 17 tables with indexes and relationships
+    - Run against: SvagsCorporateDb
+    - Estimated time: < 2 seconds
+
+3️⃣  03_InsertSeedData.sql
+    - Inserts sample data (products, techs, jobs, etc.)
+    - Run against: SvagsCorporateDb
+    - Estimated time: < 2 seconds
+
+4️⃣  04_VerifyDatabase.sql (VERIFY SETUP)
+    - Confirms everything was created correctly
+    - Run against: SvagsCorporateDb
+    - Estimated time: < 1 second
+
+================================================================================
+QUICK SETUP IN SSMS
+================================================================================
+
+Step 1: Open SQL Server Management Studio
+Step 2: Connect to: localhost\SQLEXPRESS
+Step 3: File → Open File → select 01_CreateDatabase.sql → Execute (F5)
+Step 4: File → Open File → select 02_CreateTables.sql → Execute (F5)
+        (Switch database to SvagsCorporateDb in top-left dropdown)
+Step 5: File → Open File → select 03_InsertSeedData.sql → Execute (F5)
+Step 6: File → Open File → select 04_VerifyDatabase.sql → Execute (F5)
+
+================================================================================
+CONNECTION STRING
+================================================================================
+
+Server=localhost\SQLEXPRESS;Database=SvagsCorporateDb;Trusted_Connection=True;TrustServerCertificate=True;
+
+In JSON (appsettings.json):
+  "Server=localhost\\SQLEXPRESS;Database=SvagsCorporateDb;Trusted_Connection=True;TrustServerCertificate=True;"
+
+================================================================================
+DATABASE SCHEMA (17 TABLES)
+================================================================================
+
+CONTENT TABLES (5):
+  ✓ Products (2 records)
+  ✓ Technologies (15 records)
+  ✓ Solutions (5 records)
+  ✓ Industries (5 records)
+  ✓ NewsArticles (3 records)
+
+COMPANY TABLES (3):
+  ✓ CompanyProfiles (1 record)
+  ✓ CompanyValues (4 records)
+  ✓ Milestones (5 records)
+
+CAREERS TABLES (5):
+  ✓ CareersInfos (1 record)
+  ✓ Benefits (6 records)
+  ✓ HiringSteps (5 records)
+  ✓ JobPositions (5 records)
+  ✓ CareerPrograms (3 records)
+
+FORM SUBMISSION TABLES (4):
+  ✓ ContactSubmissions (empty - for form submissions)
+  ✓ NewsletterSubscribers (empty - for signups)
+  ✓ JobApplications (empty - for job applications)
+
+================================================================================
+RESET/CLEANUP
+================================================================================
+
+If you need to start over, run:
+  00_DropDatabase.sql
+
+Then re-run scripts 01-04.
+
+OR in SSMS:
+  USE master;
+  DROP DATABASE [SvagsCorporateDb];
+
+================================================================================
+STARTING THE .NET API
+================================================================================
+
+After database is set up:
+
+  cd C:\Sai\svags-corporate\backend\SvagsCorporate.Api
+  dotnet run
+
+API will start on: http://localhost:5080
+Swagger docs: http://localhost:5080/swagger
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+❌ "Cannot connect to localhost\SQLEXPRESS"
+   → Make sure SQL Server is running
+   → Check SQL Server Configuration Manager
+
+❌ "Database creation failed"
+   → Check data folder path in 01_CreateDatabase.sql
+   → Default: C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\
+
+❌ "Tables not created"
+   → Ensure you switched to SvagsCorporateDb before running 02_CreateTables.sql
+   → Look at top-left dropdown in SSMS query window
+
+❌ "Seed data not inserted"
+   → Run 04_VerifyDatabase.sql to check table count
+   → Check for any error messages in output
+
+❌ ".NET app can't connect to database"
+   → Verify connection string in appsettings.json
+   → Check database name: SvagsCorporateDb (not SvagsCorporate or other variations)
+   → Run 04_VerifyDatabase.sql to confirm database exists and is accessible
+
+================================================================================
+FILES & DOCUMENTATION
+================================================================================
+
+Database folder: C:\Sai\svags-corporate\backend\database\
+  ├── 00_DropDatabase.sql (cleanup)
+  ├── 01_CreateDatabase.sql
+  ├── 02_CreateTables.sql
+  ├── 03_InsertSeedData.sql
+  ├── 04_VerifyDatabase.sql
+  ├── README.md (detailed documentation)
+  └── ... other files
+
+Main setup guide: C:\Sai\svags-corporate\backend\DATABASE_SETUP_GUIDE.md
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+✓ Scripts use Windows Authentication (Trusted_Connection=True)
+✓ All timestamps are stored in UTC
+✓ All text fields support Unicode
+✓ Foreign key relationships are enforced (ON DELETE CASCADE)
+✓ Indexes created for performance on frequently queried columns
+✓ Database is ready for .NET Web API to use
+
+================================================================================
+SAMPLE VERIFY QUERY
+================================================================================
+
+After setup, run this in SSMS to check:
+
+  USE SvagsCorporateDb;
+  SELECT 'Products' TableName, COUNT(*) Count FROM Products
+  UNION ALL SELECT 'Technologies', COUNT(*) FROM Technologies
+  UNION ALL SELECT 'Solutions', COUNT(*) FROM Solutions
+  UNION ALL SELECT 'Industries', COUNT(*) FROM Industries
+  UNION ALL SELECT 'NewsArticles', COUNT(*) FROM NewsArticles
+  UNION ALL SELECT 'JobPositions', COUNT(*) FROM JobPositions;
+
+Expected results:
+  Products: 2
+  Technologies: 15
+  Solutions: 5
+  Industries: 5
+  NewsArticles: 3
+  JobPositions: 5
+
+================================================================================
+NEXT STEPS AFTER DATABASE SETUP
+================================================================================
+
+1. Confirm database is running (run 04_VerifyDatabase.sql)
+2. Start .NET API (dotnet run)
+3. Test API: http://localhost:5080/swagger
+4. Update Angular frontend to use API instead of JSON files
+5. Connect Angular to backend via HTTP calls
+
+================================================================================
+
+Questions? Check DATABASE_SETUP_GUIDE.md for detailed information!
+
+Created: 2026-09-21
+SVAGS Technologies
+Full-Stack: .NET 10 + Angular 21 + SQL Server
+================================================================================

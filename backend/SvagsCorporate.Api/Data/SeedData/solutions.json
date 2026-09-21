@@ -1,0 +1,52 @@
+{
+  "solutions": [
+    {
+      "id": "marketplace",
+      "title": "Marketplace Platforms",
+      "description": "End-to-end marketplace solutions connecting buyers and sellers with intelligent matching, secure payments, and real-time communication.",
+      "icon": "pi pi-shopping-cart",
+      "color": "#009688",
+      "features": ["Multi-vendor support", "Payment integration", "Real-time chat", "Analytics dashboard"]
+    },
+    {
+      "id": "enterprise",
+      "title": "Enterprise Software",
+      "description": "Scalable enterprise applications built for complex business workflows, team collaboration, and data-driven decision making.",
+      "icon": "pi pi-building",
+      "color": "#6366F1",
+      "features": ["Role-based access", "Workflow automation", "ERP integration", "Custom reporting"]
+    },
+    {
+      "id": "mobile",
+      "title": "Mobile Applications",
+      "description": "Cross-platform mobile apps with native performance, beautiful UI, and seamless user experiences on iOS and Android.",
+      "icon": "pi pi-mobile",
+      "color": "#8B5CF6",
+      "features": ["iOS & Android", "Offline support", "Push notifications", "Biometric auth"]
+    },
+    {
+      "id": "cloud",
+      "title": "Cloud Solutions",
+      "description": "Cloud-native architectures designed for infinite scalability, high availability, and cost-optimized infrastructure.",
+      "icon": "pi pi-cloud",
+      "color": "#0078D4",
+      "features": ["Auto-scaling", "Multi-region", "99.9% uptime SLA", "Cost optimization"]
+    },
+    {
+      "id": "ai",
+      "title": "AI Solutions",
+      "description": "Intelligent automation and AI-powered features that transform raw data into actionable insights and smart workflows.",
+      "icon": "pi pi-sparkles",
+      "color": "#F59E0B",
+      "features": ["Predictive analytics", "NLP processing", "Computer vision", "Recommendation engines"]
+    },
+    {
+      "id": "custom",
+      "title": "Custom Software",
+      "description": "Bespoke software solutions tailored to your unique business requirements, built with modern technologies and best practices.",
+      "icon": "pi pi-code",
+      "color": "#10B981",
+      "features": ["Requirements analysis", "Agile development", "Quality assurance", "Ongoing support"]
+    }
+  ]
+}

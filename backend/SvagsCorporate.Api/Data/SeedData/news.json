@@ -1,0 +1,24 @@
+{
+  "news": [
+    {
+      "id": "svags-launch",
+      "title": "SVAGS Technologies Launches Its First Product: SVAGS Smart Car Service Platform",
+      "excerpt": "SVAGS TECHNOLOGIES announces the launch of SVAGS, a smart car service platform available on web, Android, and iOS, connecting vehicle owners with trusted service centers.",
+      "category": "Product Launch",
+      "date": "2026-08-17",
+      "readTime": "3 min read",
+      "featured": true,
+      "tags": ["Product Launch", "SVAGS", "Automotive"]
+    },
+    {
+      "id": "company-founded",
+      "title": "SVAGS TECHNOLOGIES Incorporated in India",
+      "excerpt": "We are excited to announce the incorporation of SVAGS TECHNOLOGIES, an Indian technology company with a vision to build multiple world-class software products.",
+      "category": "Company Update",
+      "date": "2026-06-15",
+      "readTime": "2 min read",
+      "featured": false,
+      "tags": ["Company", "Announcement"]
+    }
+  ]
+}

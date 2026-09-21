@@ -53,6 +53,35 @@
     </div>
   </div>
 
+  <!-- Newsletter Section -->
+  <div class="footer-newsletter">
+    <div class="footer-newsletter-inner">
+      <h3>Stay Updated</h3>
+      <p>Subscribe to our newsletter for the latest updates and insights</p>
+      <form class="newsletter-form" (ngSubmit)="subscribeNewsletter()">
+        <input
+          type="email"
+          placeholder="Enter your email"
+          [(ngModel)]="newsletterEmail"
+          name="email"
+          [disabled]="isSubscribing()"
+        >
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="isSubscribing()"
+        >
+          <i class="pi pi-send"></i>
+        </button>
+      </form>
+      @if (subscriptionMessage()) {
+        <p [class.success]="subscriptionSuccess()" [class.error]="!subscriptionSuccess()" class="subscription-message">
+          {{ subscriptionMessage() }}
+        </p>
+      }
+    </div>
+  </div>
+
   <!-- Bottom bar -->
   <div class="footer-bottom">
     <div class="footer-bottom-inner">
