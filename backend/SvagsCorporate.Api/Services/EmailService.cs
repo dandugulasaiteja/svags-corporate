@@ -157,7 +157,7 @@ public class EmailService : IEmailService
             var smtpPassword = _config["Email:SmtpPassword"];
             var fromEmail = _config["Email:FromEmail"] ?? "noreply@svagstech.com";
 
-            if (string.IsNullOrWhiteSpace(smtpServer) || string.IsNullOrWhiteSpace(smtpUsername))
+            if (string.IsNullOrWhiteSpace(smtpServer) || string.IsNullOrWhiteSpace(smtpUsername) || string.IsNullOrWhiteSpace(smtpPassword))
             {
                 _logger.LogWarning("Email not sent to {toEmail}: SMTP configuration is not set", toEmail);
                 return;
