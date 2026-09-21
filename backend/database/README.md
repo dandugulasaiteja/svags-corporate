@@ -9,8 +9,20 @@ This folder contains SQL Server database setup scripts for the SVAGS Technologie
 Execute the SQL scripts in the following order:
 
 1. **01_CreateDatabase.sql** - Creates the `SvagsCorporateDb` database
-2. **02_CreateTables.sql** - Creates all tables with relationships and indexes
-3. **03_InsertSeedData.sql** - Inserts seed data from the application
+   **Local/on-prem SQL Server only** (e.g. SQLEXPRESS). Skip this on Azure SQL
+   Database — Azure SQL is provisioned via the Azure control plane
+   (`az sql db create` or the Portal), not a raw `CREATE DATABASE` with
+   physical file paths.
+2. **02_CreateTables.sql** - Creates all tables with relationships and indexes.
+   Works unchanged on both local SQL Server and Azure SQL Database.
+3. **03_InsertSeedData.sql** - Inserts seed data mirroring
+   `backend/SvagsCorporate.Api/Data/SeedData/*.json`. Works unchanged on both.
+4. **04_VerifyDatabase.sql** - Verifies tables, indexes, foreign keys, and
+   seed data landed correctly. Works unchanged on both.
+
+On Azure SQL, connect SSMS/Azure Data Studio/`sqlcmd` directly to
+`<your-server>.database.windows.net` with the `SvagsCorporateDb` database
+already created, and run scripts 2-4 only.
 
 ## How to Execute
 
@@ -39,6 +51,23 @@ sqlcmd -S localhost\SQLEXPRESS -E -d SvagsCorporateDb -i 02_CreateTables.sql
 # Execute seed data insertion
 sqlcmd -S localhost\SQLEXPRESS -E -d SvagsCorporateDb -i 03_InsertSeedData.sql
 ```
+
+### Option 2b: Against Azure SQL Database
+
+The database itself is provisioned via the Azure control plane, not
+`01_CreateDatabase.sql` — see the note in Execution Order above. Once
+`SvagsCorporateDb` exists on your Azure SQL logical server, run scripts 2-4
+with SQL authentication (Azure SQL doesn't support Windows/Trusted auth):
+
+```bash
+sqlcmd -S <your-server>.database.windows.net -d SvagsCorporateDb -U <admin-user> -P "<password>" -i 02_CreateTables.sql
+sqlcmd -S <your-server>.database.windows.net -d SvagsCorporateDb -U <admin-user> -P "<password>" -i 03_InsertSeedData.sql
+sqlcmd -S <your-server>.database.windows.net -d SvagsCorporateDb -U <admin-user> -P "<password>" -i 04_VerifyDatabase.sql
+```
+
+Your Azure SQL Server firewall must allow your current IP (see the
+`AllowMyIP` firewall rule when you provisioned the server) or these will
+time out before they even reach the syntax.
 
 ### Option 3: Using PowerShell
 
@@ -109,11 +138,11 @@ Use this connection string in your .NET application's `appsettings.json`:
 3. **Authentication**: The scripts use Windows Authentication. Make sure your user has appropriate permissions.
 
 4. **Data Persistence**: The seed data includes:
-   - 2 products (SVAGS, SVAGS Bulk Messaging)
-   - 15 technologies
-   - 5 solutions
-   - 5 industries
-   - 3 news articles
+   - 1 product (SVAGS — the only product launched to date)
+   - 33 technologies
+   - 6 solutions
+   - 6 industries
+   - 2 news articles
    - Company profile with values and milestones
    - Careers information with positions and programs
 
@@ -141,13 +170,13 @@ SELECT 'JobPositions', COUNT(*) FROM [JobPositions];
 
 Expected output:
 ```
-Products        2
-Technologies    15
-Solutions       5
-Industries      5
-NewsArticles    3
+Products        1
+Technologies    33
+Solutions       6
+Industries      6
+NewsArticles    2
 CompanyProfiles 1
-JobPositions    5
+JobPositions    4
 ```
 
 ## Next Steps

@@ -58,26 +58,8 @@ builder.Logging.AddDebug();
 
 var app = builder.Build();
 
-// Apply migrations and seed database
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    try
-    {
-        // Ensure database is created
-        await context.Database.MigrateAsync();
-
-        // Seed database
-        var seedDataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "SeedData");
-        var initializer = new DbInitializer(context, scope.ServiceProvider.GetRequiredService<ILogger<DbInitializer>>(), seedDataPath);
-        await initializer.InitializeAsync();
-    }
-    catch (Exception ex)
-    {
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred during database initialization");
-    }
-}
+// Schema and seed data are managed manually via the scripts in backend/database/ —
+// no automatic EF Core migration or seeding on startup.
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())

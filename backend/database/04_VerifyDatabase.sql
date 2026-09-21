@@ -96,7 +96,7 @@ SELECT
     'Clustered' AS 'Type'
 FROM sys.tables t
 INNER JOIN sys.indexes i ON t.object_id = i.object_id
-WHERE i.type = 1 AND t.name LIKE 'Products' OR t.name LIKE 'Technologies' OR t.name LIKE 'NewsletterSubscribers'
+WHERE i.type = 1 AND (t.name LIKE 'Products' OR t.name LIKE 'Technologies' OR t.name LIKE 'NewsletterSubscribers')
 ORDER BY t.name, i.name;
 
 GO

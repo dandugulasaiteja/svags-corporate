@@ -1,5 +1,9 @@
 -- Create SVAGS Technologies Database
--- Execute this script to create the database
+-- For a LOCAL/ON-PREM SQL Server instance only (e.g. SQLEXPRESS).
+-- Does NOT apply to Azure SQL Database: Azure SQL is provisioned via the
+-- Azure control plane (e.g. `az sql db create`), not a raw CREATE DATABASE
+-- with physical file paths — Azure manages storage itself. On Azure SQL,
+-- skip this script and go straight to 02_CreateTables.sql.
 
 USE master;
 GO
@@ -47,7 +51,6 @@ ALTER DATABASE [SvagsCorporateDb] SET CONCAT_NULL_YIELDS_NULL ON;
 ALTER DATABASE [SvagsCorporateDb] SET NUMERIC_ROUNDABORT OFF;
 ALTER DATABASE [SvagsCorporateDb] SET QUOTED_IDENTIFIER ON;
 ALTER DATABASE [SvagsCorporateDb] SET RECURSIVE_TRIGGERS OFF;
-ALTER DATABASE [SvagsCorporateDb] SET DISABLE_NEO_INITIALIZATION = OFF;
 ALTER DATABASE [SvagsCorporateDb] SET ALLOW_SNAPSHOT_ISOLATION ON;
 ALTER DATABASE [SvagsCorporateDb] SET READ_COMMITTED_SNAPSHOT ON;
 GO
