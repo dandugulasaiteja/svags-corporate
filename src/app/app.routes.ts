@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/careers/careers').then(m => m.CareersComponent)
   },
   {
+    path: 'news',
+    loadComponent: () => import('./pages/news/news').then(m => m.NewsComponent)
+  },
+  {
     path: 'contact',
     loadComponent: () => import('./pages/contact/contact').then(m => m.ContactComponent)
   },

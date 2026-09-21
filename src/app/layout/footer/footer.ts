@@ -36,6 +36,7 @@ export class FooterComponent {
     { label: 'Solutions', route: '/solutions' },
     { label: 'Industries', route: '/industries' },
     { label: 'Technologies', route: '/technologies' },
+    { label: 'News', route: '/news' },
   ];
 
   legal = [

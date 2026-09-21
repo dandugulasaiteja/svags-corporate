@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { ContentService } from '../../core/services/content.service';
 import { SeoService } from '../../core/services/seo.service';
 import { NewsArticle } from '../../models';
@@ -15,6 +15,9 @@ export class NewsComponent implements OnInit {
   private seo = inject(SeoService);
 
   news = signal<NewsArticle[]>([]);
+
+  featuredArticle = computed(() => this.news().find(a => a.featured) ?? this.news()[0]);
+  otherArticles = computed(() => this.news().filter(a => a !== this.featuredArticle()));
 
   ngOnInit(): void {
     this.seo.set({

@@ -10,7 +10,7 @@
   <div class="container">
     @if (news().length > 0) {
       <!-- Featured article -->
-      @if (news()[0]; as featured) {
+      @if (featuredArticle(); as featured) {
         <div class="featured-article">
           <div class="article-meta">
             <span class="article-category">{{ featured.category }}</span>
@@ -29,7 +29,7 @@
 
       <!-- Other articles -->
       <div class="news-grid">
-        @for (article of news().slice(1); track article.id) {
+        @for (article of otherArticles(); track article.id) {
           <div class="news-card">
             <div class="article-meta">
               <span class="article-category">{{ article.category }}</span>

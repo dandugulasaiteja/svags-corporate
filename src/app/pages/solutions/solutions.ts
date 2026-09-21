@@ -19,7 +19,7 @@ export class SolutionsComponent implements OnInit {
   ngOnInit(): void {
     this.seo.set({
       title: 'Solutions',
-      description: 'Explore SVAGS Technologies solutions — from marketplace platforms to AI-powered enterprise software.',
+      description: 'Marketplace and mobile solutions proven through SVAGS today, plus the enterprise, cloud, and AI capability our team brings to future products.',
       url: '/solutions'
     });
     this.content.getSolutions().subscribe(s => this.solutions.set(s));
