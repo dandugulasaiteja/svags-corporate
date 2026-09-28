@@ -128,3 +128,5 @@ stages:
               appType: 'webAppLinux'
               appName: '$(webAppName)'
               package: '$(Pipeline.Workspace)/web/svags-corporate-web.zip'
+              appSettings: |
+                -SCM_DO_BUILD_DURING_DEPLOYMENT false
