@@ -1,4 +1,6 @@
+using System.IO.Compression;
 using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using SvagsCorporate.Api.Data;
@@ -10,6 +12,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+
+// Response compression (gzip + brotli)
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<GzipCompressionProvider>();
+    options.Providers.Add<BrotliCompressionProvider>();
+});
+builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Optimal;
+});
+builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Optimal;
+});
+
+// Memory cache and cache service
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<ICacheService, MemoryCacheService>();
 
 // Rate limiting for public form submission endpoints (per client IP)
 builder.Services.AddRateLimiter(options =>
@@ -74,6 +96,7 @@ else
 }
 
 app.UseHttpsRedirection();
+app.UseResponseCompression();
 app.UseCors("AllowSpecificOrigins");
 app.UseRateLimiter();
 app.UseAuthorization();

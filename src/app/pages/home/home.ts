@@ -1,6 +1,7 @@
-import { Component, OnInit, inject, signal, PLATFORM_ID, AfterViewInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, inject, signal, PLATFORM_ID, AfterViewInit, DestroyRef, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentService } from '../../core/services/content.service';
 import { SeoService } from '../../core/services/seo.service';
 import { Product, Technology } from '../../models';
@@ -16,11 +17,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
   private content = inject(ContentService);
   private seo = inject(SeoService);
   private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
 
   @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
 
   products = signal<Product[]>([]);
   technologies = signal<Technology[]>([]);
+  isLoadingProducts = signal(false);
+  isLoadingTechnologies = signal(false);
+  productError = signal<string | null>(null);
+  technologiesError = signal<string | null>(null);
 
   stats = [
     { value: '1', label: 'Product Live', icon: 'pi pi-box' },
@@ -51,8 +57,36 @@ export class HomeComponent implements OnInit, AfterViewInit {
       description: 'SVAGS TECHNOLOGIES builds innovative software products that simplify everyday life and empower businesses worldwide.',
       url: '/'
     });
-    this.content.getProducts().subscribe(p => this.products.set(p));
-    this.content.getTechnologies().subscribe(t => this.technologies.set(t));
+
+    this.isLoadingProducts.set(true);
+    this.content.getProducts()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (p) => {
+          this.products.set(p);
+          this.productError.set(null);
+        },
+        error: (err) => {
+          this.productError.set('Failed to load products. Please refresh.');
+          console.error('Error loading products:', err);
+        },
+        complete: () => this.isLoadingProducts.set(false)
+      });
+
+    this.isLoadingTechnologies.set(true);
+    this.content.getTechnologies()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (t) => {
+          this.technologies.set(t);
+          this.technologiesError.set(null);
+        },
+        error: (err) => {
+          this.technologiesError.set('Failed to load technologies. Please refresh.');
+          console.error('Error loading technologies:', err);
+        },
+        complete: () => this.isLoadingTechnologies.set(false)
+      });
   }
 
   ngAfterViewInit(): void {

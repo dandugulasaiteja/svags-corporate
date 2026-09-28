@@ -149,39 +149,56 @@ public class EmailService : IEmailService
 
     private async Task SendEmailAsync(string toEmail, string subject, string htmlBody, CancellationToken cancellationToken = default)
     {
-        try
-        {
-            var smtpServer = _config["Email:SmtpServer"];
-            var smtpPort = int.Parse(_config["Email:SmtpPort"] ?? "587");
-            var smtpUsername = _config["Email:SmtpUsername"];
-            var smtpPassword = _config["Email:SmtpPassword"];
-            var fromEmail = _config["Email:FromEmail"] ?? "noreply@svagstech.com";
+        const int maxRetries = 3;
+        var retryCount = 0;
+        var baseDelayMs = 1000;
 
-            if (string.IsNullOrWhiteSpace(smtpServer) || string.IsNullOrWhiteSpace(smtpUsername) || string.IsNullOrWhiteSpace(smtpPassword))
+        while (retryCount <= maxRetries)
+        {
+            try
             {
-                _logger.LogWarning("Email not sent to {toEmail}: SMTP configuration is not set", toEmail);
+                var smtpServer = _config["Email:SmtpServer"];
+                var smtpPort = int.Parse(_config["Email:SmtpPort"] ?? "587");
+                var smtpUsername = _config["Email:SmtpUsername"];
+                var smtpPassword = _config["Email:SmtpPassword"];
+                var fromEmail = _config["Email:FromEmail"] ?? "noreply@svagstech.com";
+
+                if (string.IsNullOrWhiteSpace(smtpServer) || string.IsNullOrWhiteSpace(smtpUsername) || string.IsNullOrWhiteSpace(smtpPassword))
+                {
+                    _logger.LogWarning("Email not sent to {toEmail}: SMTP configuration is not set", toEmail);
+                    return;
+                }
+
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("SVAGS TECHNOLOGIES", fromEmail));
+                message.To.Add(new MailboxAddress(string.Empty, toEmail));
+                message.Subject = subject;
+                message.Body = new TextPart("html") { Text = htmlBody };
+
+                using (var client = new SmtpClient())
+                {
+                    await client.ConnectAsync(smtpServer, smtpPort, SecureSocketOptions.StartTls, cancellationToken);
+                    await client.AuthenticateAsync(smtpUsername, smtpPassword, cancellationToken);
+                    await client.SendAsync(message, cancellationToken);
+                    await client.DisconnectAsync(true, cancellationToken);
+                }
+
+                _logger.LogInformation("Email sent successfully to {toEmail}", toEmail);
                 return;
             }
-
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("SVAGS TECHNOLOGIES", fromEmail));
-            message.To.Add(new MailboxAddress(string.Empty, toEmail));
-            message.Subject = subject;
-            message.Body = new TextPart("html") { Text = htmlBody };
-
-            using (var client = new SmtpClient())
+            catch (Exception ex)
             {
-                await client.ConnectAsync(smtpServer, smtpPort, SecureSocketOptions.StartTls, cancellationToken);
-                await client.AuthenticateAsync(smtpUsername, smtpPassword, cancellationToken);
-                await client.SendAsync(message, cancellationToken);
-                await client.DisconnectAsync(true, cancellationToken);
-            }
+                retryCount++;
+                if (retryCount > maxRetries)
+                {
+                    _logger.LogError(ex, "Failed to send email to {toEmail} after {retryCount} retries", toEmail, maxRetries);
+                    return;
+                }
 
-            _logger.LogInformation("Email sent successfully to {toEmail}", toEmail);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to send email to {toEmail}", toEmail);
+                var delayMs = baseDelayMs * (int)Math.Pow(2, retryCount - 1);
+                _logger.LogWarning(ex, "Email send to {toEmail} failed, retrying in {delayMs}ms (attempt {retryCount}/{maxRetries})", toEmail, delayMs, retryCount, maxRetries);
+                await Task.Delay(delayMs, cancellationToken);
+            }
         }
     }
 }

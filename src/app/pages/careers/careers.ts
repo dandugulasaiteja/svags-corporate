@@ -1,4 +1,5 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContentService } from '../../core/services/content.service';
@@ -17,14 +18,18 @@ export class CareersComponent implements OnInit {
   private content = inject(ContentService);
   private seo = inject(SeoService);
   private formsService = inject(FormsService);
+  private destroyRef = inject(DestroyRef);
 
   careers = signal<Careers | null>(null);
+  isLoading = signal(false);
+  error = signal<string | null>(null);
   showApplicationModal = signal(false);
   isSubmitting = signal(false);
   applicationMessage = signal('');
   applicationSuccess = signal(false);
   selectedPosition = signal<any | null>(null);
   resumeFile = signal<File | null>(null);
+  formValidationErrors = signal<string[]>([]);
 
   applicationForm = signal({
     name: '',
@@ -39,7 +44,21 @@ export class CareersComponent implements OnInit {
       description: 'Join SVAGS Technologies and build technology that shapes tomorrow. Explore open positions and our culture.',
       url: '/careers'
     });
-    this.content.getCareers().subscribe(c => this.careers.set(c));
+
+    this.isLoading.set(true);
+    this.content.getCareers()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (c) => {
+          this.careers.set(c);
+          this.error.set(null);
+        },
+        error: (err) => {
+          this.error.set('Failed to load career information. Please refresh.');
+          console.error('Error loading careers:', err);
+        },
+        complete: () => this.isLoading.set(false)
+      });
   }
 
   openApplicationModal(position: any): void {
@@ -58,19 +77,24 @@ export class CareersComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-      const maxSize = 5 * 1024 * 1024; // 5MB
+      const maxSize = 5 * 1024 * 1024;
+      const errors: string[] = [];
 
       if (!validTypes.includes(file.type)) {
-        this.applicationMessage.set('Please upload a PDF or Word document');
-        return;
+        errors.push('Please upload a PDF or Word document');
       }
 
       if (file.size > maxSize) {
-        this.applicationMessage.set('File size must be less than 5MB');
+        errors.push('File size must be less than 5MB');
+      }
+
+      if (errors.length > 0) {
+        this.formValidationErrors.set(errors);
         return;
       }
 
       this.resumeFile.set(file);
+      this.formValidationErrors.set([]);
       this.applicationMessage.set('');
     }
   }
@@ -78,15 +102,31 @@ export class CareersComponent implements OnInit {
   submitApplication(): void {
     const form = this.applicationForm();
     const position = this.selectedPosition();
+    const errors: string[] = [];
 
-    if (!form.name || !form.email || !form.phone || !form.message) {
-      this.applicationMessage.set('Please fill in all fields');
-      this.applicationSuccess.set(false);
-      return;
+    // Validation
+    if (!form.name || form.name.trim().length < 2) {
+      errors.push('Name must be at least 2 characters');
+    }
+
+    if (!form.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      errors.push('Please enter a valid email');
+    }
+
+    if (!form.phone || !/^\d{7,}$/.test(form.phone.replace(/[\s\-\+()]/g, ''))) {
+      errors.push('Please enter a valid phone number');
+    }
+
+    if (!form.message || form.message.trim().length < 10) {
+      errors.push('Message must be at least 10 characters');
     }
 
     if (!this.resumeFile()) {
-      this.applicationMessage.set('Please upload your resume');
+      errors.push('Please upload your resume');
+    }
+
+    if (errors.length > 0) {
+      this.formValidationErrors.set(errors);
       this.applicationSuccess.set(false);
       return;
     }
@@ -101,26 +141,29 @@ export class CareersComponent implements OnInit {
 
     this.isSubmitting.set(true);
     this.applicationMessage.set('');
+    this.formValidationErrors.set([]);
 
-    this.formsService.submitJobApplication(formData).subscribe({
-      next: (response) => {
-        if (response.success) {
-          this.applicationSuccess.set(true);
-          this.applicationMessage.set('Application submitted successfully! We\'ll be in touch soon.');
-          this.resetApplicationForm();
-          setTimeout(() => this.closeApplicationModal(), 2000);
-        } else {
+    this.formsService.submitJobApplication(formData)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (response) => {
+          if (response.success) {
+            this.applicationSuccess.set(true);
+            this.applicationMessage.set('Application submitted successfully! We\'ll be in touch soon.');
+            this.resetApplicationForm();
+            setTimeout(() => this.closeApplicationModal(), 2000);
+          } else {
+            this.applicationSuccess.set(false);
+            this.applicationMessage.set(response.message || 'Failed to submit application');
+          }
+          this.isSubmitting.set(false);
+        },
+        error: (error) => {
           this.applicationSuccess.set(false);
-          this.applicationMessage.set(response.message || 'Failed to submit application');
+          this.applicationMessage.set(error.message || 'An error occurred while submitting your application');
+          this.isSubmitting.set(false);
         }
-        this.isSubmitting.set(false);
-      },
-      error: (error) => {
-        this.applicationSuccess.set(false);
-        this.applicationMessage.set(error.error?.message || 'An error occurred while submitting your application');
-        this.isSubmitting.set(false);
-      }
-    });
+      });
   }
 
   updateFormField(field: string, value: string): void {
@@ -129,6 +172,7 @@ export class CareersComponent implements OnInit {
       ...current,
       [field]: value
     });
+    this.formValidationErrors.set([]);
   }
 
   private resetApplicationForm(): void {
@@ -141,5 +185,6 @@ export class CareersComponent implements OnInit {
     this.resumeFile.set(null);
     this.applicationMessage.set('');
     this.applicationSuccess.set(false);
+    this.formValidationErrors.set([]);
   }
 }

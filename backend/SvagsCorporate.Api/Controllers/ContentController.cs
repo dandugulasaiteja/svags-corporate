@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SvagsCorporate.Api.Data;
 using SvagsCorporate.Api.Dtos;
 using SvagsCorporate.Api.Models;
+using SvagsCorporate.Api.Services;
 using System.Net.Mime;
 
 namespace SvagsCorporate.Api.Controllers;
@@ -14,11 +15,21 @@ public class ContentController : ControllerBase
 {
     private readonly AppDbContext _context;
     private readonly ILogger<ContentController> _logger;
+    private readonly ICacheService _cacheService;
+    private const string CacheKeyProducts = "content_products";
+    private const string CacheKeyTechnologies = "content_technologies";
+    private const string CacheKeySolutions = "content_solutions";
+    private const string CacheKeyIndustries = "content_industries";
+    private const string CacheKeyCompany = "content_company";
+    private const string CacheKeyCareers = "content_careers";
+    private const string CacheKeyNews = "content_news";
+    private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(6);
 
-    public ContentController(AppDbContext context, ILogger<ContentController> logger)
+    public ContentController(AppDbContext context, ILogger<ContentController> logger, ICacheService cacheService)
     {
         _context = context;
         _logger = logger;
+        _cacheService = cacheService;
     }
 
     /// <summary>
@@ -29,6 +40,15 @@ public class ContentController : ControllerBase
     {
         try
         {
+            if (_cacheService.Get<List<ProductDto>>(CacheKeyProducts) is { } cachedData)
+            {
+                return Ok(new ApiResponse<List<ProductDto>>
+                {
+                    Success = true,
+                    Data = cachedData
+                });
+            }
+
             var products = await _context.Products.ToListAsync();
             var dtos = products.Select(p => new ProductDto
             {
@@ -43,6 +63,8 @@ public class ContentController : ControllerBase
                 Technologies = p.Technologies,
                 Features = p.Features,
             }).ToList();
+
+            _cacheService.Set(CacheKeyProducts, dtos, CacheDuration);
 
             return Ok(new ApiResponse<List<ProductDto>>
             {
@@ -70,6 +92,15 @@ public class ContentController : ControllerBase
     {
         try
         {
+            if (_cacheService.Get<List<TechnologyDto>>(CacheKeyTechnologies) is { } cachedData)
+            {
+                return Ok(new ApiResponse<List<TechnologyDto>>
+                {
+                    Success = true,
+                    Data = cachedData
+                });
+            }
+
             var technologies = await _context.Technologies.ToListAsync();
             var dtos = technologies.Select(t => new TechnologyDto
             {
@@ -81,6 +112,8 @@ public class ContentController : ControllerBase
                 Color = t.Color,
                 Proficiency = t.Proficiency,
             }).ToList();
+
+            _cacheService.Set(CacheKeyTechnologies, dtos, CacheDuration);
 
             return Ok(new ApiResponse<List<TechnologyDto>>
             {
@@ -108,6 +141,15 @@ public class ContentController : ControllerBase
     {
         try
         {
+            if (_cacheService.Get<List<SolutionDto>>(CacheKeySolutions) is { } cachedData)
+            {
+                return Ok(new ApiResponse<List<SolutionDto>>
+                {
+                    Success = true,
+                    Data = cachedData
+                });
+            }
+
             var solutions = await _context.Solutions.ToListAsync();
             var dtos = solutions.Select(s => new SolutionDto
             {
@@ -118,6 +160,8 @@ public class ContentController : ControllerBase
                 Color = s.Color,
                 Features = s.Features,
             }).ToList();
+
+            _cacheService.Set(CacheKeySolutions, dtos, CacheDuration);
 
             return Ok(new ApiResponse<List<SolutionDto>>
             {
@@ -145,6 +189,15 @@ public class ContentController : ControllerBase
     {
         try
         {
+            if (_cacheService.Get<List<IndustryDto>>(CacheKeyIndustries) is { } cachedData)
+            {
+                return Ok(new ApiResponse<List<IndustryDto>>
+                {
+                    Success = true,
+                    Data = cachedData
+                });
+            }
+
             var industries = await _context.Industries.ToListAsync();
             var dtos = industries.Select(i => new IndustryDto
             {
@@ -155,6 +208,8 @@ public class ContentController : ControllerBase
                 Color = i.Color,
                 UseCases = i.UseCases,
             }).ToList();
+
+            _cacheService.Set(CacheKeyIndustries, dtos, CacheDuration);
 
             return Ok(new ApiResponse<List<IndustryDto>>
             {
@@ -182,6 +237,15 @@ public class ContentController : ControllerBase
     {
         try
         {
+            if (_cacheService.Get<CompanyDto>(CacheKeyCompany) is { } cachedData)
+            {
+                return Ok(new ApiResponse<CompanyDto>
+                {
+                    Success = true,
+                    Data = cachedData
+                });
+            }
+
             var company = await _context.CompanyProfiles
                 .Include(c => c.Values)
                 .Include(c => c.Milestones)
@@ -220,6 +284,8 @@ public class ContentController : ControllerBase
                 }).ToList(),
             };
 
+            _cacheService.Set(CacheKeyCompany, dto, CacheDuration);
+
             return Ok(new ApiResponse<CompanyDto>
             {
                 Success = true,
@@ -246,6 +312,15 @@ public class ContentController : ControllerBase
     {
         try
         {
+            if (_cacheService.Get<CareersDto>(CacheKeyCareers) is { } cachedData)
+            {
+                return Ok(new ApiResponse<CareersDto>
+                {
+                    Success = true,
+                    Data = cachedData
+                });
+            }
+
             var careers = await _context.CareersInfos
                 .Include(c => c.Benefits)
                 .Include(c => c.HiringProcess)
@@ -297,6 +372,8 @@ public class ContentController : ControllerBase
                 }).ToList(),
             };
 
+            _cacheService.Set(CacheKeyCareers, dto, CacheDuration);
+
             return Ok(new ApiResponse<CareersDto>
             {
                 Success = true,
@@ -323,6 +400,15 @@ public class ContentController : ControllerBase
     {
         try
         {
+            if (_cacheService.Get<List<NewsArticleDto>>(CacheKeyNews) is { } cachedData)
+            {
+                return Ok(new ApiResponse<List<NewsArticleDto>>
+                {
+                    Success = true,
+                    Data = cachedData
+                });
+            }
+
             var articles = await _context.NewsArticles.ToListAsync();
             var dtos = articles.Select(a => new NewsArticleDto
             {
@@ -335,6 +421,8 @@ public class ContentController : ControllerBase
                 Featured = a.Featured,
                 Tags = a.Tags,
             }).ToList();
+
+            _cacheService.Set(CacheKeyNews, dtos, CacheDuration);
 
             return Ok(new ApiResponse<List<NewsArticleDto>>
             {
