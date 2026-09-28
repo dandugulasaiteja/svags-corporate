@@ -1,8 +1,14 @@
 {
   "company": {
     "name": "SVAGS TECHNOLOGIES",
+    "legalName": "SVAGS TECHNOLOGIES PRIVATE LIMITED",
+    "cin": "U62099TS2026PTC217705",
+    "gst": "36ABUCS0564R1ZB",
     "founded": "2026",
     "headquarters": "India",
+    "registeredOffice": "5-54/5, Dichpally RS, Dichpally, Nizamabad, Telangana 503175, India",
+    "businessOffice": "303, 9 Star Pride, Prashant Hills, Rai Durg, Hyderabad, Telangana, 500104, India",
+    "phone": "+91 9059200828",
     "mission": "To build innovative software products that simplify everyday life and empower businesses worldwide through technology.",
     "vision": "To become a globally recognized technology company that creates multiple impactful products across diverse industries.",
     "description": "SVAGS TECHNOLOGIES is an Indian technology company on a mission to build world-class software products. We combine deep engineering expertise with a passion for design to create products that people love.",

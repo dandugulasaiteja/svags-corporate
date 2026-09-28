@@ -1,0 +1,104 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/*
+      - src/**
+      - package.json
+      - angular.json
+      - tsconfig.json
+
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  nodeVersion: '24.x'
+  buildConfiguration: 'production'
+  azureServiceConnection: 'SVAGS-TECHNOLOGIES-Azure-Prod'
+  webAppName: 'svags-corporate-web'
+
+stages:
+
+# ============================================================
+# BUILD
+# ============================================================
+
+- stage: Build
+  displayName: 'Build Web App'
+  jobs:
+  - job: BuildWeb
+    displayName: 'Build Angular Web App'
+    steps:
+    - task: NodeTool@0
+      displayName: 'Install Node.js'
+      inputs:
+        versionSpec: '$(nodeVersion)'
+
+    - task: Npm@1
+      displayName: 'Install Dependencies'
+      inputs:
+        command: 'install'
+        workingDir: '$(System.DefaultWorkingDirectory)'
+
+    - task: Npm@1
+      displayName: 'Build Angular App'
+      inputs:
+        command: 'custom'
+        customCommand: 'run build'
+        workingDir: '$(System.DefaultWorkingDirectory)'
+
+    - task: Npm@1
+      displayName: 'Run Tests'
+      inputs:
+        command: 'custom'
+        customCommand: 'test -- --watch=false --browsers=ChromeHeadless'
+        workingDir: '$(System.DefaultWorkingDirectory)'
+      continueOnError: true
+
+    - task: ArchiveFiles@2
+      displayName: 'Create Web ZIP'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/svags-corporate/browser'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/svags-corporate-web.zip'
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Web Artifact'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/svags-corporate-web.zip'
+        ArtifactName: 'web'
+        publishLocation: 'Container'
+
+
+# ============================================================
+# DEPLOY
+# ============================================================
+
+- stage: Deploy_PROD
+  displayName: 'Deploy Web to PROD'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: DeployWeb
+    displayName: 'Deploy svags-corporate-web'
+    environment: 'PROD'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: web
+
+          - task: AzureWebApp@1
+            displayName: 'Deploy Web App to Azure App Service'
+            inputs:
+              azureSubscription: '$(azureServiceConnection)'
+              appType: 'webAppLinux'
+              appName: '$(webAppName)'
+              package: '$(Pipeline.Workspace)/web/svags-corporate-web.zip'
