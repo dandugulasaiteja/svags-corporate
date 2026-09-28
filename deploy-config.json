@@ -1,0 +1,53 @@
+{
+  "Dev": {
+    "resourceGroup": "svags-rg-dev",
+    "appServiceName": "svags-corporate-api-dev",
+    "appServicePlan": "svags-plan-dev",
+    "sqlServerName": "svags-corporate-sql-dev",
+    "databaseName": "svags-corporate-db-dev",
+    "location": "eastus",
+    "appServiceSku": "B2",
+    "sqlSku": "Standard",
+    "sqlCapacity": "S0",
+    "aspnetEnvironment": "Development",
+    "tags": {
+      "environment": "dev",
+      "project": "svags-corporate",
+      "managed": "true"
+    }
+  },
+  "Staging": {
+    "resourceGroup": "svags-rg-staging",
+    "appServiceName": "svags-corporate-api-staging",
+    "appServicePlan": "svags-plan-staging",
+    "sqlServerName": "svags-corporate-sql-staging",
+    "databaseName": "svags-corporate-db-staging",
+    "location": "eastus",
+    "appServiceSku": "S1",
+    "sqlSku": "Standard",
+    "sqlCapacity": "S1",
+    "aspnetEnvironment": "Staging",
+    "tags": {
+      "environment": "staging",
+      "project": "svags-corporate",
+      "managed": "true"
+    }
+  },
+  "Prod": {
+    "resourceGroup": "svags-rg",
+    "appServiceName": "svags-corporate-api",
+    "appServicePlan": "svags-plan",
+    "sqlServerName": "svags-corporate-sql",
+    "databaseName": "svags-corporate-db",
+    "location": "eastus",
+    "appServiceSku": "P1V2",
+    "sqlSku": "Standard",
+    "sqlCapacity": "S2",
+    "aspnetEnvironment": "Production",
+    "tags": {
+      "environment": "prod",
+      "project": "svags-corporate",
+      "managed": "true"
+    }
+  }
+}
