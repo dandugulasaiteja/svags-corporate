@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://svagstech.com/sitemap.xml
+Sitemap: https://www.svagstech.com/sitemap.xml

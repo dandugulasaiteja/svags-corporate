@@ -1,4 +1,5 @@
 @use "tailwindcss";
+@import "primeicons/primeicons.css";
 
 :root {
   --primary: #F97316;
@@ -62,8 +63,8 @@ h1, h2, h3, h4, h5, h6 {
 
 // Section padding
 .section-pad {
-  padding: 6rem 0;
-  @media (max-width: 768px) { padding: 4rem 0; }
+  padding: 3rem 0;
+  @media (max-width: 768px) { padding: 2rem 0; }
 }
 
 // Container

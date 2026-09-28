@@ -16,7 +16,7 @@ export class SeoService {
   private document = inject(DOCUMENT);
 
   private readonly siteName = 'SVAGS TECHNOLOGIES';
-  private readonly baseUrl = 'https://svagstech.com';
+  private readonly baseUrl = 'https://www.svagstech.com';
 
   set(config: SeoConfig): void {
     const canonicalUrl = `${this.baseUrl}${config.url ?? ''}`;

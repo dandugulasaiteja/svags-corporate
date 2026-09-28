@@ -39,7 +39,7 @@ public class EmailService : IEmailService
                         <p style=""color: #666; font-size: 12px;"">
                             SVAGS TECHNOLOGIES<br/>
                             Building Technology That Shapes Tomorrow<br/>
-                            <a href=""https://svagstech.com"">svagstech.com</a>
+                            <a href=""https://www.svagstech.com"">svagstech.com</a>
                         </p>
                     </div>
                 </body>
@@ -114,7 +114,7 @@ public class EmailService : IEmailService
                         <p style=""color: #666; font-size: 12px;"">
                             SVAGS TECHNOLOGIES<br/>
                             Building Technology That Shapes Tomorrow<br/>
-                            <a href=""https://svagstech.com/careers"">Explore More Opportunities</a>
+                            <a href=""https://www.svagstech.com/careers"">Explore More Opportunities</a>
                         </p>
                     </div>
                 </body>
