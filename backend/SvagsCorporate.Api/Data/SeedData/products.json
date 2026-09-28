@@ -6,7 +6,7 @@
       "tagline": "Smart Car Service Platform",
       "description": "A modern, intelligent platform that connects car owners with trusted service centers. Streamline bookings, track repairs in real-time, and manage your vehicle's entire service history — all in one place.",
       "status": "live",
-      "url": "https://svags.com",
+      "url": "https://www.svags.com",
       "icon": "pi pi-car",
       "color": "#009688",
       "technologies": ["Angular", ".NET", "Flutter", "Azure", "SQL Server", "Redis"],

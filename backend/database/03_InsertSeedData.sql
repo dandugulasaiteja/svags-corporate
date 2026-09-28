@@ -17,7 +17,7 @@ VALUES
     'Smart Car Service Platform',
     'A modern, intelligent platform that connects car owners with trusted service centers. Streamline bookings, track repairs in real-time, and manage your vehicle''s entire service history — all in one place.',
     'live',
-    'https://svags.com',
+    'https://www.svags.com',
     'pi pi-car',
     '#009688',
     '["Angular",".NET","Flutter","Azure","SQL Server","Redis"]',

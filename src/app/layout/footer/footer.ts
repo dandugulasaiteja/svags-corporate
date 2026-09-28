@@ -26,7 +26,7 @@ export class FooterComponent {
   subscriptionSuccess = signal(false);
 
   products = [
-    { label: 'SVAGS', href: 'https://svags.com', external: true },
+    { label: 'SVAGS', href: 'https://www.svags.com', external: true },
     { label: 'All Products', route: '/products' },
   ];
 
