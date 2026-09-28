@@ -4,65 +4,87 @@ trigger:
       - main
   paths:
     include:
-      - src/*
       - src/**
-      - package.json
+      - public/**
       - angular.json
-      - tsconfig.json
+      - package.json
+      - package-lock.json
+      - tsconfig*.json
+      - server.ts
+      - server.mts
+      - server.tsconfig.json
 
 pr: none
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-24.04'
 
 variables:
   nodeVersion: '24.x'
-  buildConfiguration: 'production'
   azureServiceConnection: 'SVAGS-TECHNOLOGIES-Azure-Prod'
   webAppName: 'svags-corporate-web'
+  buildConfiguration: 'production'
 
 stages:
 
 # ============================================================
 # BUILD
 # ============================================================
-
 - stage: Build
-  displayName: 'Build Web App'
+  displayName: 'Build Web'
+
   jobs:
   - job: BuildWeb
-    displayName: 'Build Angular Web App'
+    displayName: 'Build Angular SSR'
+
     steps:
+
     - task: NodeTool@0
-      displayName: 'Install Node.js'
+      displayName: 'Install Node.js 24'
       inputs:
         versionSpec: '$(nodeVersion)'
 
-    - task: Npm@1
-      displayName: 'Install Dependencies'
-      inputs:
-        command: 'install'
-        workingDir: '$(System.DefaultWorkingDirectory)'
+    - script: |
+        node --version
+        npm --version
+      displayName: 'Verify Node.js'
 
-    - task: Npm@1
-      displayName: 'Build Angular App'
-      inputs:
-        command: 'custom'
-        customCommand: 'run build'
-        workingDir: '$(System.DefaultWorkingDirectory)'
+    - script: |
+        npm ci
+      displayName: 'Install dependencies'
 
-    - task: Npm@1
-      displayName: 'Run Tests'
+    - script: |
+        npm run build
+      displayName: 'Build Angular SSR'
+
+    - script: |
+        test -f dist/svags-corporate/server/server.mjs
+      displayName: 'Verify SSR server output'
+
+    # Remove development-only packages after build.
+    # Angular SSR runtime files remain in dist/.
+    - script: |
+        npm prune --omit=dev
+      displayName: 'Prepare production dependencies'
+
+    # Prepare deployment package
+    - task: CopyFiles@2
+      displayName: 'Copy deployment files'
       inputs:
-        command: 'custom'
-        customCommand: 'test -- --watch=false --browsers=ChromeHeadless'
-        workingDir: '$(System.DefaultWorkingDirectory)'
-      continueOnError: true
+        SourceFolder: '$(Build.SourcesDirectory)'
+        Contents: |
+          dist/**
+          package.json
+          package-lock.json
+          node_modules/**
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/web'
+        CleanTargetFolder: true
+        OverWrite: true
 
     - task: ArchiveFiles@2
       displayName: 'Create Web ZIP'
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/svags-corporate/browser'
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/web'
         includeRootFolder: false
         archiveType: 'zip'
         archiveFile: '$(Build.ArtifactStagingDirectory)/svags-corporate-web.zip'
@@ -79,24 +101,28 @@ stages:
 # ============================================================
 # DEPLOY
 # ============================================================
-
 - stage: Deploy_PROD
   displayName: 'Deploy Web to PROD'
   dependsOn: Build
   condition: succeeded()
+
   jobs:
   - deployment: DeployWeb
     displayName: 'Deploy svags-corporate-web'
+
     environment: 'PROD'
+
     strategy:
       runOnce:
         deploy:
+
           steps:
+
           - download: current
             artifact: web
 
           - task: AzureWebApp@1
-            displayName: 'Deploy Web App to Azure App Service'
+            displayName: 'Deploy Website to Azure App Service'
             inputs:
               azureSubscription: '$(azureServiceConnection)'
               appType: 'webAppLinux'
