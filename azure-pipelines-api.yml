@@ -23,13 +23,15 @@ stages:
 # ============================================================
 # BUILD
 # ============================================================
-
 - stage: Build
   displayName: 'Build API'
+
   jobs:
   - job: BuildApi
     displayName: 'Build .NET 10 API'
+
     steps:
+
     - task: UseDotNet@2
       displayName: 'Install .NET 10 SDK'
       inputs:
@@ -77,19 +79,23 @@ stages:
 # ============================================================
 # DEPLOY
 # ============================================================
-
 - stage: Deploy_PROD
   displayName: 'Deploy API to PROD'
   dependsOn: Build
   condition: succeeded()
+
   jobs:
   - deployment: DeployApi
     displayName: 'Deploy svags-corporate-api'
+
     environment: 'PROD'
+
     strategy:
       runOnce:
         deploy:
+
           steps:
+
           - download: current
             artifact: api
 
