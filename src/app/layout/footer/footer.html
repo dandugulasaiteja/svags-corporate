@@ -26,7 +26,7 @@
         <h4>Products</h4>
         @for (item of products; track item.label) {
           @if (item.route) {
-            <a [routerLink]="item.route">{{ item.label }}</a>
+            <a [routerLink]="item.route" (click)="scrollToTop()">{{ item.label }}</a>
           } @else {
             <a [href]="item.href" target="_blank" rel="noopener noreferrer">{{ item.label }}</a>
           }
@@ -35,19 +35,19 @@
       <div class="footer-col">
         <h4>Company</h4>
         @for (item of company; track item.label) {
-          <a [routerLink]="item.route">{{ item.label }}</a>
+          <a [routerLink]="item.route" (click)="scrollToTop()">{{ item.label }}</a>
         }
       </div>
       <div class="footer-col">
         <h4>Resources</h4>
         @for (item of resources; track item.label) {
-          <a [routerLink]="item.route">{{ item.label }}</a>
+          <a [routerLink]="item.route" (click)="scrollToTop()">{{ item.label }}</a>
         }
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
         @for (item of legal; track item.label) {
-          <a [routerLink]="item.route">{{ item.label }}</a>
+          <a [routerLink]="item.route" (click)="scrollToTop()">{{ item.label }}</a>
         }
       </div>
     </div>
@@ -85,7 +85,7 @@
   <!-- Bottom bar -->
   <div class="footer-bottom">
     <div class="footer-bottom-inner">
-      <p>&copy; {{ year }} SVAGS TECHNOLOGIES. All rights reserved.</p>
+      <p>&copy; {{ year }} SVAGS TECHNOLOGIES PRIVATE LIMITED. All rights reserved.</p>
       <p class="footer-location">
         <i class="pi pi-map-marker"></i>
         Made in India

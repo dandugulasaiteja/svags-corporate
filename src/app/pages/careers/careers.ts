@@ -41,7 +41,7 @@ export class CareersComponent implements OnInit {
   ngOnInit(): void {
     this.seo.set({
       title: 'Careers',
-      description: 'Join SVAGS Technologies and build technology that shapes tomorrow. Explore open positions and our culture.',
+      description: 'Join SVAGS TECHNOLOGIES and build technology that shapes tomorrow. Explore open positions and our culture.',
       url: '/careers'
     });
 

@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.seo.set({
       title: 'Products',
-      description: 'Explore SVAGS Technologies products — innovative software solutions built for the modern world.',
+      description: 'Explore SVAGS TECHNOLOGIES products — innovative software solutions built for the modern world.',
       url: '/products'
     });
 

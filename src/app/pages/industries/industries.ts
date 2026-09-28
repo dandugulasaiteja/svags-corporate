@@ -23,7 +23,7 @@ export class IndustriesComponent implements OnInit {
   ngOnInit(): void {
     this.seo.set({
       title: 'Industries',
-      description: 'SVAGS Technologies is live in automotive today, with engineering capability built to extend into healthcare, education, finance, retail, and government.',
+      description: 'SVAGS TECHNOLOGIES is live in automotive today, with engineering capability built to extend into healthcare, education, finance, retail, and government.',
       url: '/industries'
     });
 

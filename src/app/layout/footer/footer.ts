@@ -16,6 +16,10 @@ export class FooterComponent {
 
   year = new Date().getFullYear();
 
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   newsletterEmail = signal('');
   isSubscribing = signal(false);
   subscriptionMessage = signal('');

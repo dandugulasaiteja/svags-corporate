@@ -21,6 +21,6 @@ export class SecurityComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.seo.set({ title: 'Security', description: 'How SVAGS Technologies keeps your data safe and secure.', url: '/security' });
+    this.seo.set({ title: 'Security', description: 'How SVAGS TECHNOLOGIES keeps your data safe and secure.', url: '/security' });
   }
 }

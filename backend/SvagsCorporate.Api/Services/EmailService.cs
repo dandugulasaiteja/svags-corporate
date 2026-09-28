@@ -55,7 +55,7 @@ public class EmailService : IEmailService
         var safeSubject = System.Net.WebUtility.HtmlEncode(subject);
         var safeMessage = System.Net.WebUtility.HtmlEncode(message);
 
-        var notificationEmail = _config["Email:NotificationEmail"] ?? "hello@svagstech.com";
+        var notificationEmail = _config["Email:NotificationEmail"] ?? "contact@svags.com";
         var emailSubject = $"New Contact Form Submission: {safeSubject}";
         var body = $@"
             <html>
@@ -129,7 +129,7 @@ public class EmailService : IEmailService
         var safeEmail = System.Net.WebUtility.HtmlEncode(email);
         var safePositionTitle = System.Net.WebUtility.HtmlEncode(positionTitle);
 
-        var notificationEmail = _config["Email:NotificationEmail"] ?? "careers@svagstech.com";
+        var notificationEmail = _config["Email:NotificationEmail"] ?? "careers@svags.com";
         var subject = $"New Job Application: {safePositionTitle} from {safeName}";
         var body = $@"
             <html>
@@ -161,7 +161,7 @@ public class EmailService : IEmailService
                 var smtpPort = int.Parse(_config["Email:SmtpPort"] ?? "587");
                 var smtpUsername = _config["Email:SmtpUsername"];
                 var smtpPassword = _config["Email:SmtpPassword"];
-                var fromEmail = _config["Email:FromEmail"] ?? "noreply@svagstech.com";
+                var fromEmail = _config["Email:FromEmail"] ?? "noreply@svags.com";
 
                 if (string.IsNullOrWhiteSpace(smtpServer) || string.IsNullOrWhiteSpace(smtpUsername) || string.IsNullOrWhiteSpace(smtpPassword))
                 {

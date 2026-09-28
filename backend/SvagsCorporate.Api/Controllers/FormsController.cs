@@ -229,11 +229,11 @@ public class FormsController : ControllerBase
 
             // Send confirmation email to applicant
             await _emailService.SendJobApplicationConfirmationAsync(
-                dto.Email, dto.Name, dto.PositionTitle ?? "SVAGS Technologies", cancellationToken);
+                dto.Email, dto.Name, dto.PositionTitle ?? "SVAGS TECHNOLOGIES", cancellationToken);
 
             // Send notification to HR
             await _emailService.SendJobApplicationNotificationAsync(
-                dto.Name, dto.Email, dto.PositionTitle ?? "SVAGS Technologies", cancellationToken);
+                dto.Name, dto.Email, dto.PositionTitle ?? "SVAGS TECHNOLOGIES", cancellationToken);
 
             application.EmailSent = true;
             await _context.SaveChangesAsync(cancellationToken);
